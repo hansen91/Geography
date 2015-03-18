@@ -67,7 +67,7 @@ public class KontinentListFragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.list_fragment, null);
-        return view;
+        return view;lkn
     }
     */
     /*
