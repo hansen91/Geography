@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import durnek.bakalarka.geography.activities.KontinentListActivity;
@@ -22,9 +23,16 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        KontinentListActivity kl = new KontinentListActivity();
+
+
+
         Button vyucba = (Button)findViewById(R.id.btnVyucba);
         vyucba.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
+
+
+
 
                 //Toast.makeText(context,"Vyucba kliknuta",Toast.LENGTH_LONG).show();
                 Intent myIntent = new Intent(context,KontinentListActivity.class);
@@ -76,6 +84,8 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     public void ukonciGeografiu(){
         this.finish();
     }
+
+
 
 
     @Override

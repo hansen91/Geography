@@ -12,7 +12,7 @@
 
     <fragment
         android:id="@+id/kontinent_list"
-        android:name="durnek.bakalarka.geography.fragments.KontinentListFragment"
+       android:name="durnek.bakalarka.geography.fragments.KontinentListFragment"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1.29"
