@@ -3,7 +3,6 @@ package durnek.bakalarka.geography.classes;
 
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  * Created by Lukas on 13. 3. 2015.

@@ -4,14 +4,14 @@ package durnek.bakalarka.geography.activities;
  * Created by Lukas on 12. 3. 2015.
  */
 import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentTransaction;
-import android.app.ListActivity;
 import android.content.Intent;
-import android.database.Cursor;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
-import android.widget.SimpleCursorAdapter;
+import android.support.v4.app.FragmentActivity;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import java.io.IOException;
+import java.util.ArrayList;
 
 import durnek.bakalarka.geography.DataBaseHelper;
 import durnek.bakalarka.geography.R;
@@ -30,7 +30,23 @@ public class KontinentListActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_kontinent);
+        setContentView(R.layout.fragment_kontinent);
+
+      /*  DataBaseHelper dbHelper = new DataBaseHelper(getApplicationContext());
+        try{
+            dbHelper.createDataBase();
+        } catch(IOException e){
+            e.printStackTrace();
+        }
+
+        ListView lvContinents = (ListView)findViewById(R.id.list);
+        ArrayList<String> listContinent = dbHelper.dajKontinenty();
+
+        if(listContinent != null) {
+            ArrayAdapter adapter = new ArrayAdapter<String>(getApplicationContext(),
+                    R.layout.kontinent_item, R.id.kontinent, listContinent);
+            lvContinents.setAdapter(adapter);
+        }
 
         //FragmentTransaction transaction = getFragmentManager()
 

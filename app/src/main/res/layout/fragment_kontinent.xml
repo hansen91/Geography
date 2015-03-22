@@ -13,12 +13,9 @@
     tools:context=".KontinentListActivity">
 
 
-   <fragment
-        class ="durnek.bakalarka.geography.fragments.KontinentListFragment"
-        android:id="@+id/kontinent_list_fragment"
-        android:layout_weight="2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-       tools:layout="@android:layout/list_content"/>
-
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/kontinent_view"
+        android:layout_gravity="left|top" />
 </FrameLayout>

@@ -1,22 +1,29 @@
 package durnek.bakalarka.geography.fragments;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.app.ListFragment;
+import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import durnek.bakalarka.geography.DataBaseHelper;
 import durnek.bakalarka.geography.R;
 import durnek.bakalarka.geography.adapters.KontinentListAdapter;
+import durnek.bakalarka.geography.application.App;
 import durnek.bakalarka.geography.classes.Kontinent;
 import durnek.bakalarka.geography.classes.Vyucba;
 
@@ -28,8 +35,11 @@ public class KontinentListFragment
     extends ListFragment {
     //private static Parcelable mListViewScrollPos = null;
     //private Callbacks mCallbacks = sDummyCallbacks; //prepinanie fragmentov
+    DataBaseHelper dbHelper;
+    ListView lvContinents;
+    ListAdapter adapter;
+    List<Kontinent> kontinentList;
 
-    private List<Kontinent> list;
     private OnKontinentSelectedListener mListener;
 
     /*
@@ -54,40 +64,50 @@ public class KontinentListFragment
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        DataBaseHelper db = new DataBaseHelper(getActivity().getApplicationContext(),"db.sqlite");
-        Cursor cursor = db.getKontintent();
-        String[] from = {"nazov"};
-        int[] to = {R.id.kontinent};
-        SimpleCursorAdapter listAdapter = new SimpleCursorAdapter(getActivity().getApplicationContext(),R.layout.list_item,cursor,from,to);
-        setListAdapter(listAdapter);
+        Context c = getActivity();
+        setListAdapter(new ArrayAdapter<String>(c, R.layout.fragment_kontinent));
 
     }
-        /*
-    @Override
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.list_fragment, null);
-        return view;lkn
+        View rootView = inflater.inflate(R.layout.fragment_kontinent, container,false);
+        dbHelper = new DataBaseHelper(this.getActivity());
+        try {
+            dbHelper.createDataBase();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        lvContinents = (ListView)rootView.findViewById(R.id.kontinent_view);
+        List<String> listContinent = dbHelper.getAllContinents();
+
+        if (listContinent != null) {
+            adapter = new ArrayAdapter<String>(this.getActivity(),
+                    R.layout.item_view, R.id.kontinent, listContinent);
+            lvContinents.setAdapter(adapter);
+        }
+        return rootView;
     }
-    */
     /*
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+    }
     }*/
 
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-            mListener = (OnKontinentSelectedListener) activity;
-        } catch (ClassCastException e) {
-            Toast.makeText(getActivity().getApplicationContext(), "ERROR " + e.getMessage().toString(), Toast.LENGTH_LONG).show();
+        @Override
+        public void onAttach (Activity activity) {
+            super.onAttach(activity);
+            try {
+                mListener = (OnKontinentSelectedListener) activity;
+            } catch (ClassCastException e) {
+                throw new ClassCastException(activity.toString() + "nie je implementovany listener");
+            }
         }
-        /*
+
         // Activities containing this fragment must implement its callbacks.
-        if (!(activity instanceof Callbacks)) {
+     /*   if (!(activity instanceof Callbacks)) {
             throw new IllegalStateException(
                     "Activity must implement fragment's callbacks.");
         }
@@ -95,25 +115,24 @@ public class KontinentListFragment
         mCallbacks = (Callbacks) activity;
         */
 
-       // setListAdapter(aAdapter);
-    }
+            // setListAdapter(aAdapter);
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
+        @Override
+        public void onDetach () {
+            super.onDetach();
+            mListener = null;
         /*
         // Reset the active callbacks interface to the dummy implementation.
         mCallbacks = sDummyCallbacks;*/
-    }
-
-    @Override
-    public void onListItemClick(ListView listView, View view, int position, long id) {
-        super.onListItemClick(listView, view, position, id);
-        if (null != mListener){
-            mListener.onKontinentSelected(list.get(position));
         }
-    }
+
+       @Override
+        public void onListItemClick (ListView listView, View view,int position, long id){
+            super.onListItemClick(listView, view, position, id);
+            if (null != mListener) {
+                mListener.onKontinentSelected(kontinentList.get(position));
+            }
+        }
     /*
     @Override
     public void onSaveInstanceState(Bundle outState) {
@@ -130,11 +149,10 @@ public class KontinentListFragment
 
     }
     */
-    public interface OnKontinentSelectedListener{
+        public interface OnKontinentSelectedListener {
 
-        public void onKontinentSelected(Kontinent kontinent);
+            public void onKontinentSelected(Kontinent kontinent);
+        }
+
+
     }
-
-
-
-}

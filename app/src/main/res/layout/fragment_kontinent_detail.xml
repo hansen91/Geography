@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="12dp"
+        android:id="@+id/kontinent_detail"
         android:background="@drawable/card_background" >
 
         <TextView
@@ -21,7 +22,16 @@
             android:layout_margin="2dp" />
 
         <TextView
-            android:id="@+id/zlozenie"
+            android:id="@+id/pocStatov"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:gravity="center_vertical"
+            android:textSize="20sp"
+            android:textStyle="normal" />
+
+        <TextView
+            android:id="@+id/pocUzemi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"

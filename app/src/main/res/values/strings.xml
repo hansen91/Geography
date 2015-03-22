@@ -6,5 +6,7 @@
     <string name="title_activity_kontinenty">Kontinenty</string>
     <string name="Europa">Európa</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_kontinent_detail">KontinentDetailActivity</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>

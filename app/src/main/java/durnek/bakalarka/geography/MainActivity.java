@@ -1,5 +1,6 @@
 package durnek.bakalarka.geography;
 
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
@@ -7,31 +8,42 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.io.IOException;
+import java.util.List;
+
+import durnek.bakalarka.geography.activities.KontinentDetailActivity;
 import durnek.bakalarka.geography.activities.KontinentListActivity;
+import durnek.bakalarka.geography.classes.Kontinent;
+import durnek.bakalarka.geography.fragments.KontinentDetailFragment;
 
 
 public class MainActivity extends ActionBarActivity implements View.OnClickListener{
     Context context = this;
-
+    private boolean mDualPane;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        KontinentListActivity kl = new KontinentListActivity();
+
+        if (findViewById(R.id.kontinent_detail_container) == null)
+            mDualPane = false; //Portrait ||
+        else
+            mDualPane = true; //Landscape |  |
+
 
 
 
         Button vyucba = (Button)findViewById(R.id.btnVyucba);
         vyucba.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
-
-
 
 
                 //Toast.makeText(context,"Vyucba kliknuta",Toast.LENGTH_LONG).show();
@@ -79,13 +91,9 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         startActivity(myIntent);
     }
 
-
-
     public void ukonciGeografiu(){
         this.finish();
     }
-
-
 
 
     @Override
@@ -108,6 +116,19 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onKontinentSelected(Kontinent kontinent) {
+        if (mDualPane) {
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            transaction.replace(R.id.kontinent_detail_container, KontinentDetailFragment.newInstance(kontinent));
+            transaction.commit();
+        } else {
+            Intent intent = new Intent(this, KontinentDetailActivity.class);
+            intent.putExtra("kontinent", kontinent);
+            startActivity(intent);
+
+        }
     }
 
     @Override
