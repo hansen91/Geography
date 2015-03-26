@@ -19,7 +19,7 @@ import durnek.bakalarka.geography.R;
 import durnek.bakalarka.geography.classes.Kontinent;
 import durnek.bakalarka.geography.fragments.KontinentListFragment;
 
-public class KontinentListActivity
+public class KontinentActivity
     extends Activity
     implements KontinentListFragment.OnKontinentSelectedListener {
 
@@ -38,33 +38,6 @@ public class KontinentListActivity
             FragmentTransaction transaction = getFragmentManager().beginTransaction();
             transaction.replace(R.id.cointainer, KontinentListFragment.newInstance());
             transaction.commit();
-
-
-      /*  DataBaseHelper dbHelper = new DataBaseHelper(getApplicationContext());
-        try{
-            dbHelper.createDataBase();
-        } catch(IOException e){
-            e.printStackTrace();
-        }
-
-        ListView lvContinents = (ListView)findViewById(R.id.list);
-        ArrayList<String> listContinent = dbHelper.dajKontinenty();
-
-        if(listContinent != null) {
-            ArrayAdapter adapter = new ArrayAdapter<String>(getApplicationContext(),
-                    R.layout.kontinent_item, R.id.kontinent, listContinent);
-            lvContinents.setAdapter(adapter);
-        }
-
-        //FragmentTransaction transaction = getFragmentManager()
-
-      /*  if (findViewById(R.id.kontinent_detail_container) != null) {
-            mTwoPane = true;
-
-            ((KontinentListFragment)getSupportFragmentManager().findFragmentById(
-                    R.id.kontinent_list)).setActivateOnItemClick(true);
-        }*/
-
     }
 
     @Override

@@ -16,7 +16,7 @@ import durnek.bakalarka.geography.classes.Kontinent;
 /**
  * Created by Lukas on 6. 3. 2015.
  */
-public class KontinentListAdapter extends ArrayAdapter<Kontinent> {
+public class KontinentAdapter extends ArrayAdapter<Kontinent> {
 
     private class ViewHolder{
         TextView nazov;
@@ -25,7 +25,7 @@ public class KontinentListAdapter extends ArrayAdapter<Kontinent> {
     List<Kontinent> listCont;
     Context appContext;
 
-    public KontinentListAdapter(Context context, int resource, List<Kontinent> objects) {
+    public KontinentAdapter(Context context, int resource, List<Kontinent> objects) {
         super(context, resource, objects);
         listCont = objects;
         this.appContext = context;

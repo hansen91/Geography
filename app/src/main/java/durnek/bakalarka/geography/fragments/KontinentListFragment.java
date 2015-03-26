@@ -90,7 +90,7 @@ public class KontinentListFragment
 
         if (listContinent != null) {
             adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),
-                    R.layout.item_view2, R.id.kontinent, listContinent);
+                    R.layout.item_view, R.id.kontinent, listContinent);
             lvContinents.setAdapter(adapter);
         }
         return rootView;

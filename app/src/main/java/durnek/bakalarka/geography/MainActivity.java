@@ -8,17 +8,11 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListAdapter;
-import android.widget.ListView;
 import android.widget.Toast;
 
-import java.io.IOException;
-import java.util.List;
-
+import durnek.bakalarka.geography.activities.KontinentActivity;
 import durnek.bakalarka.geography.activities.KontinentDetailActivity;
-import durnek.bakalarka.geography.activities.KontinentListActivity;
 import durnek.bakalarka.geography.classes.Kontinent;
 import durnek.bakalarka.geography.fragments.KontinentDetailFragment;
 
@@ -47,7 +41,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
 
                 //Toast.makeText(context,"Vyucba kliknuta",Toast.LENGTH_LONG).show();
-                Intent myIntent = new Intent(context,KontinentListActivity.class);
+                Intent myIntent = new Intent(context,KontinentActivity.class);
                 startActivity(myIntent);
 
 
@@ -87,7 +81,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
     public void spustiVyucbu(){
         Toast.makeText(this,"Vyucba kliknuta",Toast.LENGTH_LONG).show();
-        Intent myIntent = new Intent(this,KontinentListActivity.class);
+        Intent myIntent = new Intent(this,KontinentActivity.class);
         startActivity(myIntent);
     }
 

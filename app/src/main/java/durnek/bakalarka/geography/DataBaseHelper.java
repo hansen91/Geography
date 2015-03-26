@@ -25,6 +25,7 @@ public class DataBaseHelper
     public static String DB_NAME = "db.sqlite";
     public static final int DB_VERSION = 1;
     public static final String TB_KONTINENT = "Kontinent";
+    public static final String TB_STAT = "Stat";
 
     private SQLiteDatabase myDB;
     private Context context;
