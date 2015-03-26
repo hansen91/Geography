@@ -4,6 +4,7 @@ package durnek.bakalarka.geography.activities;
  * Created by Lukas on 12. 3. 2015.
  */
 import android.app.Activity;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -30,7 +31,14 @@ public class KontinentListActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_kontinent);
+        //setContentView(R.layout.fragment_kontinent);
+        setContentView(R.layout.skuska);
+
+
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            transaction.replace(R.id.cointainer, KontinentListFragment.newInstance());
+            transaction.commit();
+
 
       /*  DataBaseHelper dbHelper = new DataBaseHelper(getApplicationContext());
         try{
