@@ -160,7 +160,7 @@ public class DataBaseHelper
         return listContinents;
     }
 
-  /*  public Kontinent getContinent(int id){
+    public Kontinent getContinent(int id){
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor c = db.query("Kontinent", new String[] { KEY_ID,
@@ -174,7 +174,26 @@ public class DataBaseHelper
                 Long.parseLong(c.getString(5)));
         // return kontinent
         return kontinent;
-    }*/
+    }
+
+    public Kontinent dajKontinent(int id){
+        Kontinent kontinent = null;
+        String select = "SELECT " + KEY_NAZOV + ", "+ KEY_POC_STATOV + ", " +  KEY_POC_UZEMI + ", " +
+                KEY_ROZLOHA + ", "+ KEY_POPULACIA + " FROM " + TB_KONTINENT +
+                " WHERE " + KEY_ID + " = " + id;
+        //vysledok z curzora
+        Cursor c = getReadableDatabase().rawQuery(select,null);
+        if(c != null){
+            c.moveToFirst();
+
+            kontinent = new Kontinent(Integer.parseInt(c.getString(0)),
+                    c.getString(1), Integer.parseInt(c.getString(2)),Integer.parseInt(c.getString(3)),Long.parseLong(c.getString(4)),
+                    Long.parseLong(c.getString(5)));
+            c.close();
+        }
+        return kontinent;
+    }
+
 
  /* public ArrayList<HashMap<String, String>> getAllContinents(){
         ArrayList<HashMap<String,String>> listContinents;

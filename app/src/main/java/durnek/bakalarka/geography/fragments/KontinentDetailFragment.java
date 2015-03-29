@@ -1,21 +1,15 @@
 package durnek.bakalarka.geography.fragments;
 
-import android.app.Activity;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
+
 import android.os.Bundle;
 import android.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.ListAdapter;
+import android.widget.Button;
 import android.widget.TextView;
-
+import android.widget.Toast;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 
 import durnek.bakalarka.geography.DataBaseHelper;
@@ -45,13 +39,6 @@ public class KontinentDetailFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-       DataBaseHelper dbHelper = new DataBaseHelper(getActivity());
-        try {
-            dbHelper.createDataBase();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
 
         if(getArguments() != null){
             kontinent = (Kontinent) getArguments().getParcelable("kontinent");
@@ -63,6 +50,29 @@ public class KontinentDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_kontinent_detail, container, false);
+
+        //nacitanie z databazy
+        DataBaseHelper dbHelper = new DataBaseHelper(getActivity());
+        try {
+            dbHelper.createDataBase();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        dbHelper.getWritableDatabase();
+
+        dbHelper.dajKontinent(kontinent.getId());
+
+        //tlacidlo Prehlad statov
+        Button btnPrehlad = (Button) v.findViewById(R.id.btnPrehlad);
+        btnPrehlad.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(),"Tu sa zobrazia štáty", Toast.LENGTH_LONG).show();
+            }
+        });
+
+
         ((TextView) v.findViewById(R.id.nazov)).setText(kontinent.getNazov());
         ((TextView) v.findViewById(R.id.pocStatov)).setText(kontinent.getPocetStatov());
         ((TextView) v.findViewById(R.id.pocUzemi)).setText(kontinent.getPocetUzemi());

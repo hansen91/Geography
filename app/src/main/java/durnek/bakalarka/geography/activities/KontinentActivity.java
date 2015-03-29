@@ -38,19 +38,7 @@ public class KontinentActivity
 
     }
 
-    @Override
-    public void onKontinentSelected(Kontinent kontinent) {
-        if (mDualPane) {
-            FragmentTransaction transaction = getFragmentManager().beginTransaction();
-            transaction.replace(R.id.kontinent_detail_container, KontinentDetailFragment.newInstance(kontinent));
-            transaction.commit();
-        } else {
-            Intent intent = new Intent(this, KontinentDetailActivity.class);
-            intent.putExtra("kontinent", kontinent);
-            startActivity(intent);
 
-        }
-    }
 
 
 
@@ -91,4 +79,18 @@ public class KontinentActivity
         if (savedInstanceState != null)
             vybranyKontinent = savedInstanceState.getLong(VYBRANY_KONTINENT);
     }*/
+
+    @Override
+    public void onKontinentSelected(Kontinent kontinent) {
+        if (mDualPane) {
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            transaction.replace(R.id.kontinent_detail_container, KontinentDetailFragment.newInstance(kontinent));
+            transaction.commit();
+        } else {
+            Intent intent = new Intent(this, KontinentDetailActivity.class);
+            intent.putExtra("kontinent", kontinent);
+            startActivity(intent);
+
+        }
+    }
 }

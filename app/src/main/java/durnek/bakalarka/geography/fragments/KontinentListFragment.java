@@ -5,17 +5,13 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import android.support.v4.app.ListFragment;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import durnek.bakalarka.geography.DataBaseHelper;
@@ -136,13 +132,13 @@ public class KontinentListFragment
         mCallbacks = sDummyCallbacks;*/
         }
 
-     /*  @Override
+       @Override
         public void onListItemClick (ListView listView, View view,int position, long id){
             super.onListItemClick(listView, view, position, id);
             if (null != mListener) {
                 mListener.onKontinentSelected(kontinentList.get(position));
             }
-        }*/
+        }
 
     /*
     @Override
