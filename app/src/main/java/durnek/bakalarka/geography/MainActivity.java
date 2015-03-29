@@ -46,13 +46,6 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
 
             }
-            //Intent myIntent = new Intent(view.getContext(),Kontinent.class);
-            //startActivity(myIntent);
-             /*  AssetDatabaseOpenHelper adb = new AssetDatabaseOpenHelper(context);
-               SQLiteDatabase db = adb.openDatabase();
-               Cursor c = db.rawQuery("SELECT * FROM Kontinent;", null);
-               Log.d("MyApp", "cnt: " + c.getCount());*/
-
         });
 
 

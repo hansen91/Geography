@@ -7,47 +7,54 @@ import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 
-import java.io.IOException;
-import java.util.ArrayList;
-
-import durnek.bakalarka.geography.DataBaseHelper;
 import durnek.bakalarka.geography.R;
+import durnek.bakalarka.geography.application.OPrograme;
 import durnek.bakalarka.geography.classes.Kontinent;
+import durnek.bakalarka.geography.fragments.KontinentDetailFragment;
 import durnek.bakalarka.geography.fragments.KontinentListFragment;
 
 public class KontinentActivity
-    extends Activity
+    extends ActionBarActivity
     implements KontinentListFragment.OnKontinentSelectedListener {
 
     private static final String VYBRANY_KONTINENT = "vybrany_kontinent";
-    private static final String backName = "detail";
-    private boolean mTwoPane;
-    private long vybrany_kontinent = 0;
+    private boolean mDualPane;
+    private long vybranyKontinent = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.fragment_kontinent);
-        setContentView(R.layout.skuska);
+        setContentView(R.layout.activity_kontinent);
+
+        if (findViewById(R.id.kontinent_detail_container) == null)
+            mDualPane = false; //Portrait ||
+        else
+            mDualPane = true; //Landscape |  |
 
 
-            FragmentTransaction transaction = getFragmentManager().beginTransaction();
-            transaction.replace(R.id.cointainer, KontinentListFragment.newInstance());
-            transaction.commit();
     }
 
     @Override
     public void onKontinentSelected(Kontinent kontinent) {
-        Intent intent  = new Intent();
+        if (mDualPane) {
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            transaction.replace(R.id.kontinent_detail_container, KontinentDetailFragment.newInstance(kontinent));
+            transaction.commit();
+        } else {
+            Intent intent = new Intent(this, KontinentDetailActivity.class);
+            intent.putExtra("kontinent", kontinent);
+            startActivity(intent);
+
+        }
     }
 
 
 
-/*
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -58,27 +65,30 @@ public class KontinentActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-      /*  switch (item.getItemId()) {
-            case R.id.oprograme:
+        /*switch (item.getItemId()) {
+            case 1 : R.id.oprograme:
                 Intent i1 = new Intent(this, OPrograme.class);
                 startActivity(i1);
                 return true;
+
+        }*/
+
+        int id = item.getItemId();
+        if(id == R.id.action_settings){
+            return true;
         }
         return super.onOptionsItemSelected(item);
-        return true;
-    }*/
+
+    }
 
    /* public void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
-        savedInstanceState.putLong(VYBRANY_KONTINENT, vybrany_kontinent);
+        savedInstanceState.putLong(VYBRANY_KONTINENT, vybranyKontinent);
     }
 
     public void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         if (savedInstanceState != null)
-            vybrany_kontinent = savedInstanceState.getLong(VYBRANY_KONTINENT);
+            vybranyKontinent = savedInstanceState.getLong(VYBRANY_KONTINENT);
     }*/
-
-
-
 }

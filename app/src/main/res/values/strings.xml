@@ -6,5 +6,11 @@
     <string name="title_activity_kontinenty">Kontinenty</string>
     <string name="Europa">Európa</string>
     <string name="title_activity_kontinent_detail">KontinentDetailActivity</string>
+    <string name="txtPocStatov">Počet štátov:</string>
+    <string name="txtKontinent">Kontinent:</string>
+    <string name="txtPocUzemi">Počet území:</string>
+    <string name="txtRozloha">Rozloha:</string>
+    <string name="txtPopulacia">Populácia:</string>
+    <string name="btnPrehladStatov">Prehľad štátov</string>
 
 </resources>

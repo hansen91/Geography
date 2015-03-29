@@ -1,5 +1,6 @@
 package durnek.bakalarka.geography;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -13,7 +14,10 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
+import durnek.bakalarka.geography.classes.Kontinent;
 
 /**
  * Created by Lukas on 28. 2. 2015.
@@ -24,8 +28,18 @@ public class DataBaseHelper
     public static String DB_PATH = "/data/data/durnek.bakalarka.geography/databases/";
     public static String DB_NAME = "db.sqlite";
     public static final int DB_VERSION = 1;
+
+    //TABULKY
     public static final String TB_KONTINENT = "Kontinent";
     public static final String TB_STAT = "Stat";
+
+    //ATRIBUTY
+    private static final String KEY_ID = "id";
+    private static final String KEY_NAZOV = "nazov";
+    private static final String KEY_POC_STATOV = "pocStatov";
+    private static final String KEY_POC_UZEMI = "pocUzemi";
+    private static final String KEY_ROZLOHA = "rozloha";
+    private static final String KEY_POPULACIA = "populacia";
 
     private SQLiteDatabase myDB;
     private Context context;
@@ -146,18 +160,60 @@ public class DataBaseHelper
         return listContinents;
     }
 
+  /*  public Kontinent getContinent(int id){
+        SQLiteDatabase db = this.getReadableDatabase();
 
+        Cursor c = db.query("Kontinent", new String[] { KEY_ID,
+                        KEY_NAZOV, KEY_POC_STATOV, KEY_POC_UZEMI, KEY_ROZLOHA, KEY_POPULACIA }, KEY_ID + "=?",
+                new String[] { String.valueOf(id) }, null, null, null, null);
+        if (c != null)
+            c.moveToFirst();
 
-
-    // Add your public helper methods to access and get content from the database.
-    // You could return cursors by doing "return myDataBase.query(....)" so it'd be easy
-    // to you to create adapters for your views.
-   /* public Cursor getZoznamKontinentov(){
-        Cursor c = null;
-
-            c = getReadableDatabase().rawQuery("SELECT nazov from Kontinent ORDER BY nazov", new String[0]);
-        return c;
+        Kontinent kontinent = new Kontinent(Integer.parseInt(c.getString(0)),
+                c.getString(1), Integer.parseInt(c.getString(2)),Integer.parseInt(c.getString(3)),Long.parseLong(c.getString(4)),
+                Long.parseLong(c.getString(5)));
+        // return kontinent
+        return kontinent;
     }*/
+
+ /* public ArrayList<HashMap<String, String>> getAllContinents(){
+        ArrayList<HashMap<String,String>> listContinents;
+        listContinents = new ArrayList<HashMap<String,String>>();
+        String select = "SELECT * FROM " + TB_KONTINENT;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = db.rawQuery(select,null);
+
+        //presun na prvy zaznam
+        if(c.moveToFirst()){
+            do{
+                HashMap<String,String> hm = new HashMap<String,String>();
+                hm.put(KEY_NAZOV, c.getString(1));
+                /*hm.put(KEY_POC_STATOV, c.getString(2));
+                hm.put(KEY_POC_UZEMI, c.getString(3));
+                hm.put(KEY_ROZLOHA, c.getString(4));
+                hm.put(KEY_POPULACIA, c.getString(5));
+                //listContinents.add(hm);
+            }while(c.moveToNext()); //kurzor na dalsi zaznam
+        }
+        return listContinents;
+    }
+
+    public HashMap<String,String> getContinent(String id){
+        HashMap<String,String> hm = new HashMap<String,String>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String select = "SELECT * FROM " + TB_KONTINENT + "WHERE KEY_ID ='"+id+"'";
+        Cursor c = db.rawQuery(select,null);
+        if(c.moveToFirst()){
+            do{
+                hm.put(KEY_NAZOV, c.getString(1));
+                hm.put(KEY_POC_STATOV, c.getString(2));
+                hm.put(KEY_POC_UZEMI, c.getString(3));
+                hm.put(KEY_ROZLOHA, c.getString(4));
+                hm.put(KEY_POPULACIA, c.getString(5));
+            }while(c.moveToNext());
+        }
+        return hm;
+    }
 
 
    /* public Kontinent getKontinent(int id){
@@ -173,19 +229,5 @@ public class DataBaseHelper
     }*/
 
 
-     /*public Cursor fetchCountriesByName(String inputText) throws SQLException {
-      //Log.w(TAG, inputText);
-      Cursor mCursor = myDataBase.query("Kontinent", new String[] {"id_kontinentu",
-                          "nazov"},
-                  null, null, null, null, "nazov");
-
-
-      return mCursor;
-  }*/
-
-  /*  public Cursor getKontinent(){
-        SQLiteDatabase db = getReadableDatabase();
-        return  db.query("Kontinent", new String[]{"nazov"}, null, null, null, null, "nazov");
-    }*/
 
 }
