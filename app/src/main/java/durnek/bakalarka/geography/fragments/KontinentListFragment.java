@@ -1,22 +1,21 @@
 package durnek.bakalarka.geography.fragments;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
-
 import android.support.v4.app.ListFragment;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
-
 import java.io.IOException;
 import java.util.List;
 
 import durnek.bakalarka.geography.DataBaseHelper;
 import durnek.bakalarka.geography.R;
+import durnek.bakalarka.geography.adapters.KontinentAdapter;
 import durnek.bakalarka.geography.classes.Kontinent;
+import durnek.bakalarka.geography.classes.Svet;
 
 
 /**
@@ -25,17 +24,17 @@ import durnek.bakalarka.geography.classes.Kontinent;
 public class KontinentListFragment
     extends ListFragment {
     //private static Parcelable mListViewScrollPos = null;
-    //private Callbacks mCallbacks = sDummyCallbacks; //prepinanie fragmentov
+   // private Callbacks mCallbacks = sDummyCallbacks; //prepinanie fragmentov
+
+
     DataBaseHelper dbHelper;
-
-    ListView lvContinents;
-    ListAdapter adapter;
-    List<Kontinent> kontinentList;
-
+   // ListView lvContinents;
+    //ListAdapter adapter;
+    private List<String> kontinentList;
     private OnKontinentSelectedListener mListener;
 
-    /*
-    public interface Callbacks {
+
+    /*public interface Callbacks {
         public void onItemSelected(long id);
     }
 
@@ -43,13 +42,14 @@ public class KontinentListFragment
         @Override
         public void onItemSelected(long id) {
         }
-    };
-    */
+    };*/
 
-    public KontinentListFragment(){}
+
+    public KontinentListFragment(){
+    }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         dbHelper = new DataBaseHelper(getActivity());
@@ -60,11 +60,12 @@ public class KontinentListFragment
         }
 
         //ArrayList<HashMap<String, String>> listContinent = dbHelper.getAllContinents();
-        List<String> listContinent =   dbHelper.getAllContinents();
+        //List<String> listContinent = dbHelper.getAllContinents();
+        kontinentList = dbHelper.getAllContinents();
 
-        if(listContinent != null) {
+        if(kontinentList != null) {
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
-                   R.layout.item_view, R.id.kontinent, listContinent);
+                   R.layout.item_view, R.id.kontinent, kontinentList);
            // ArrayAdapter<HashMap<String,String>> adapter = new ArrayAdapter<HashMap<String, String>>(getActivity(),
                    // R.layout.item_view,R.id.kontinent,listContinent);
 
@@ -108,7 +109,7 @@ public class KontinentListFragment
             try {
                 mListener = (OnKontinentSelectedListener) activity;
             } catch (ClassCastException e) {
-                throw new ClassCastException(activity.toString() + "nie je implementovany listener");
+                throw new ClassCastException(activity.toString() + "nie je implementovany listener OnKontinentSelectedListener");
             }
         }
 
@@ -133,10 +134,10 @@ public class KontinentListFragment
         }
 
        @Override
-        public void onListItemClick (ListView listView, View view,int position, long id){
+        public void onListItemClick (ListView listView, View view, int position, long id){
             super.onListItemClick(listView, view, position, id);
             if (null != mListener) {
-                mListener.onKontinentSelected(kontinentList.get(position));
+                mListener.onKontinentSelected(position+1);
             }
         }
 
@@ -156,10 +157,10 @@ public class KontinentListFragment
 
     }
     */
-        public interface OnKontinentSelectedListener {
+    public interface OnKontinentSelectedListener {
 
-            public void onKontinentSelected(Kontinent kontinent);
-        }
-
+        public void onKontinentSelected(int id);
 
     }
+
+}

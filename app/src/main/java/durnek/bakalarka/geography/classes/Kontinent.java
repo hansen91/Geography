@@ -32,6 +32,17 @@ public class Kontinent implements Parcelable {
     }
 
     /**
+     * TEST
+     */
+    public Kontinent(String nazov, int pocStatov, long rozloha, long populacia){
+        this.nazov = nazov;
+        this.pocStatov = pocStatov;
+        this.pocUzemi = 0;
+        this.rozloha = rozloha;
+        this.populacia = populacia;
+    }
+
+    /**
      * načítanie dát z Parcelabla objektu
      * @param in
      */

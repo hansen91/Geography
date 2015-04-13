@@ -24,7 +24,7 @@ import durnek.bakalarka.geography.classes.Kontinent;
 public class KontinentAdapter extends ArrayAdapter<Kontinent> {
 
     private class ViewHolder{
-        ImageView obr;
+        ImageView img;
         TextView nazov;
         TextView pocStatov;
         TextView pocUzemi;
@@ -41,8 +41,6 @@ public class KontinentAdapter extends ArrayAdapter<Kontinent> {
         this.appContext = context;
     }
 
-
-
             @Override
             public int getCount() {
                 return listCont.size();
@@ -53,7 +51,7 @@ public class KontinentAdapter extends ArrayAdapter<Kontinent> {
                 View v = convertView;
                 ViewHolder holder;
                 if (v == null) {
-                    LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+                    LayoutInflater inflater = (LayoutInflater) appContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);     //LayoutInflater.from(parent.getContext());
                     v = inflater.inflate(R.layout.item_view, null);
                     holder = new ViewHolder();
 

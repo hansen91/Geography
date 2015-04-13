@@ -10,7 +10,8 @@ import android.app.FragmentTransaction;
         import durnek.bakalarka.geography.fragments.KontinentDetailFragment;
 
 public class KontinentDetailActivity extends FragmentActivity {
-    public Kontinent kont;
+
+    public int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,12 +19,11 @@ public class KontinentDetailActivity extends FragmentActivity {
         setContentView(R.layout.activity_kontinent_detail);
         //Vytiahnutie dat(Kontinent) z prijateho intentu
         Intent i = getIntent();
-        kont = (Kontinent) i.getParcelableExtra("kontinent");
+        id = i.getIntExtra("id", 1);
 
         //Vytvorenie noveho fragmentu
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.container, KontinentDetailFragment.newInstance(kont));
+        transaction.replace(R.id.container, KontinentDetailFragment.newInstance(id));
         transaction.commit();
-
     }
 }

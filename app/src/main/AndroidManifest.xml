@@ -26,7 +26,14 @@
         </activity>
         <activity
             android:name=".activities.KontinentDetailActivity"
-            android:label="@string/title_activity_kontinent_detail" >
+            android:label=".KontinentDetailActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.KontinentActivity" />
+        </activity>
+        <activity
+            android:name=".kviz.Otazka"
+            android:label="@string/title_activity_otazka" >
         </activity>
     </application>
 

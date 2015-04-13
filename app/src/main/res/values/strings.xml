@@ -12,5 +12,9 @@
     <string name="txtRozloha">Rozloha:</string>
     <string name="txtPopulacia">Populácia:</string>
     <string name="btnPrehladStatov">Prehľad štátov</string>
+    <string name="title_activity_otazka">Kvíz na hlavné mestá</string>
+    <string name="btnDoMenu">Naspäť do menu</string>
+    <string name="btnPotvrd">Potvrď</string>
+
 
 </resources>

@@ -33,18 +33,12 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             mDualPane = true; //Landscape |  |
 
 
-
-
         Button vyucba = (Button)findViewById(R.id.btnVyucba);
         vyucba.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
-
-
                 //Toast.makeText(context,"Vyucba kliknuta",Toast.LENGTH_LONG).show();
                 Intent myIntent = new Intent(context,KontinentActivity.class);
                 startActivity(myIntent);
-
-
             }
         });
 
@@ -72,12 +66,6 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         });
     }
 
-    public void spustiVyucbu(){
-        Toast.makeText(this,"Vyucba kliknuta",Toast.LENGTH_LONG).show();
-        Intent myIntent = new Intent(this,KontinentActivity.class);
-        startActivity(myIntent);
-    }
-
     public void ukonciGeografiu(){
         this.finish();
     }
@@ -103,19 +91,6 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public void onKontinentSelected(Kontinent kontinent) {
-        if (mDualPane) {
-            FragmentTransaction transaction = getFragmentManager().beginTransaction();
-            transaction.replace(R.id.kontinent_detail_container, KontinentDetailFragment.newInstance(kontinent));
-            transaction.commit();
-        } else {
-            Intent intent = new Intent(this, KontinentDetailActivity.class);
-            intent.putExtra("kontinent", kontinent);
-            startActivity(intent);
-
-        }
     }
 
     @Override

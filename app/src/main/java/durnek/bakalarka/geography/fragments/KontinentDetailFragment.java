@@ -15,21 +15,21 @@ import java.util.List;
 import durnek.bakalarka.geography.DataBaseHelper;
 import durnek.bakalarka.geography.R;
 import durnek.bakalarka.geography.classes.Kontinent;
+import durnek.bakalarka.geography.classes.Svet;
 
 
 public class KontinentDetailFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    Kontinent kontinent;
 
-    public static KontinentDetailFragment newInstance(Kontinent kontinent){
+    private int idKontinentu;
+    private Kontinent kontinent;
+
+    public static KontinentDetailFragment newInstance(int id){
         KontinentDetailFragment f = new KontinentDetailFragment();
         Bundle args = new Bundle();
-        args.putParcelable("kontinent", (android.os.Parcelable)kontinent);
+        args.putInt("id", id);
         f.setArguments(args);
         return f;
     }
-
 
     public KontinentDetailFragment() {
         // Required empty public constructor
@@ -39,9 +39,8 @@ public class KontinentDetailFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         if(getArguments() != null){
-            kontinent = (Kontinent) getArguments().getParcelable("kontinent");
+            idKontinentu = getArguments().getInt("id", 1);
         }
     }
 
@@ -60,7 +59,8 @@ public class KontinentDetailFragment extends Fragment {
         }
         dbHelper.getWritableDatabase();
 
-        dbHelper.dajKontinent(kontinent.getId());
+        kontinent = dbHelper.dajKontinent(idKontinentu);
+
 
         //tlacidlo Prehlad statov
         Button btnPrehlad = (Button) v.findViewById(R.id.btnPrehlad);

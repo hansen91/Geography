@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/pozadie">
 
@@ -95,19 +96,28 @@
         </RadioGroup>
     </LinearLayout>
 
-    <Button
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/layoutbutton"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Potvrď"
-        android:id="@+id/btnPotvrd"
-        android:layout_marginTop="31dp"
-        android:layout_below="@+id/layoutRadioBtn"
-        android:layout_alignLeft="@+id/txtOtazka"
-        android:layout_alignStart="@+id/txtOtazka"
-        android:layout_marginLeft="42dp"
-        android:layout_marginStart="42dp"
-        android:layout_alignRight="@+id/imgVlajka"
-        android:layout_alignEnd="@+id/imgVlajka" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:orientation="horizontal">
 
 
+    <Button
+        android:layout_width="77dp"
+        android:layout_height="wrap_content"
+        android:text="@string/btnDoMenu"
+        android:id="@+id/btnDoMenu"
+        android:layout_weight="0.5" />
+
+        <Button
+            android:layout_width="77dp"
+            android:layout_height="wrap_content"
+            android:text="@string/btnPotvrd"
+            android:id="@+id/btnConfirm"
+            android:layout_weight="0.5" />
+
+    </LinearLayout>
 </RelativeLayout>

@@ -1,6 +1,5 @@
 package durnek.bakalarka.geography;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -26,7 +25,8 @@ public class DataBaseHelper
         extends SQLiteOpenHelper {
 
     public static String DB_PATH = "/data/data/durnek.bakalarka.geography/databases/";
-    public static String DB_NAME = "db.sqlite";
+   // public static String DB_NAME = "db.sqlite";
+    public static String DB_NAME = "svetDB.sqlite";
     public static final int DB_VERSION = 1;
 
     //TABULKY
@@ -34,12 +34,13 @@ public class DataBaseHelper
     public static final String TB_STAT = "Stat";
 
     //ATRIBUTY
-    private static final String KEY_ID = "id";
+    private static final String KEY_ID = "id_kontinentu";
     private static final String KEY_NAZOV = "nazov";
-    private static final String KEY_POC_STATOV = "pocStatov";
-    private static final String KEY_POC_UZEMI = "pocUzemi";
     private static final String KEY_ROZLOHA = "rozloha";
-    private static final String KEY_POPULACIA = "populacia";
+    private static final String KEY_POC_STATOV = "poc_statov";
+    private static final String KEY_POC_UZEMI = "zavisle_uzemia";
+    private static final String KEY_POPULACIA = "poc_obyv";
+
 
     private SQLiteDatabase myDB;
     private Context context;
@@ -137,9 +138,10 @@ public class DataBaseHelper
         }
     }
 
+
     public List<String> getAllContinents(){
         List<String> listContinents = new ArrayList<String>();
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = getWritableDatabase();
         Cursor c;
 
         try{
@@ -161,7 +163,7 @@ public class DataBaseHelper
     }
 
     public Kontinent getContinent(int id){
-        SQLiteDatabase db = this.getReadableDatabase();
+        SQLiteDatabase db = getReadableDatabase();
 
         Cursor c = db.query("Kontinent", new String[] { KEY_ID,
                         KEY_NAZOV, KEY_POC_STATOV, KEY_POC_UZEMI, KEY_ROZLOHA, KEY_POPULACIA }, KEY_ID + "=?",
@@ -178,21 +180,29 @@ public class DataBaseHelper
 
     public Kontinent dajKontinent(int id){
         Kontinent kontinent = null;
-        String select = "SELECT " + KEY_NAZOV + ", "+ KEY_POC_STATOV + ", " +  KEY_POC_UZEMI + ", " +
+
+        String select = "SELECT " + KEY_NAZOV + ", " + KEY_POC_STATOV + ", " +  //KEY_POC_UZEMI + ", " +
                 KEY_ROZLOHA + ", "+ KEY_POPULACIA + " FROM " + TB_KONTINENT +
                 " WHERE " + KEY_ID + " = " + id;
+
         //vysledok z curzora
         Cursor c = getReadableDatabase().rawQuery(select,null);
         if(c != null){
             c.moveToFirst();
 
+            /*
             kontinent = new Kontinent(Integer.parseInt(c.getString(0)),
                     c.getString(1), Integer.parseInt(c.getString(2)),Integer.parseInt(c.getString(3)),Long.parseLong(c.getString(4)),
-                    Long.parseLong(c.getString(5)));
+                    Long.parseLong(c.getString(5)));*/
+            kontinent = new Kontinent(c.getString(0),
+                    Integer.parseInt(c.getString(1)),
+                    Long.parseLong(c.getString(2)),
+                    Long.parseLong(c.getString(3)));
             c.close();
         }
         return kontinent;
     }
+
 
 
  /* public ArrayList<HashMap<String, String>> getAllContinents(){

@@ -34,20 +34,13 @@ public class KontinentActivity
             mDualPane = false; //Portrait ||
         else
             mDualPane = true; //Landscape |  |
-
-
     }
-
-
-
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
-        return super.onCreateOptionsMenu(menu);
+        return true; //super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -81,14 +74,15 @@ public class KontinentActivity
     }*/
 
     @Override
-    public void onKontinentSelected(Kontinent kontinent) {
+    public void onKontinentSelected(int id) {
         if (mDualPane) {
             FragmentTransaction transaction = getFragmentManager().beginTransaction();
-            transaction.replace(R.id.kontinent_detail_container, KontinentDetailFragment.newInstance(kontinent));
+            transaction.replace(R.id.kontinent_detail_container, KontinentDetailFragment.newInstance(id));
             transaction.commit();
+
         } else {
             Intent intent = new Intent(this, KontinentDetailActivity.class);
-            intent.putExtra("kontinent", kontinent);
+            intent.putExtra("id", id);
             startActivity(intent);
 
         }
