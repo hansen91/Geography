@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="durnek.bakalarka.geography.fragments.KontinentDetailFragment"
-    android:orientation="horizontal">
+    android:orientation="vertical"
+    android:background="@drawable/pozadie">
 
     <TextView
             android:id="@+id/nazov"
@@ -11,11 +12,12 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:text="@string/txtKontinent"
-            android:textSize="25sp"
+            android:textSize="28sp"
             android:textStyle="bold"
             android:layout_margin="2dp"
             android:paddingLeft="5dp"
-            android:paddingTop="10dp"/>
+            android:paddingTop="10dp"
+            android:textColor="@color/primary_dark_material_dark" />
 
         <TextView
             android:id="@+id/pocStatov"
@@ -25,7 +27,8 @@
             android:text="@string/txtPocStatov"
             android:gravity="center_vertical"
             android:textSize="20sp"
-            android:textStyle="normal" />
+            android:paddingTop="10dp"
+            android:textStyle="bold|italic" />
 
         <TextView
             android:id="@+id/pocUzemi"
@@ -35,7 +38,8 @@
             android:text="@string/txtPocUzemi"
             android:gravity="center_vertical"
             android:textSize="20sp"
-            android:textStyle="normal" />
+            android:textStyle="bold|italic"
+            android:paddingTop="10dp"/>
 
         <TextView
             android:id="@+id/rozloha"
@@ -45,7 +49,8 @@
             android:text="@string/txtRozloha"
             android:gravity="center_vertical"
             android:textSize="20sp"
-            android:textStyle="normal" />
+            android:textStyle="bold|italic"
+            android:paddingTop="10dp"/>
 
         <TextView
             android:id="@+id/populacia"
@@ -55,13 +60,14 @@
             android:text="@string/txtPopulacia"
             android:gravity="center_vertical"
             android:textSize="20sp"
-            android:textStyle="normal" />
+            android:textStyle="bold|italic"
+            android:paddingTop="10dp"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/btnPrehladStatov"
         android:id="@+id/btnPrehlad"
-        android:layout_gravity="center_vertical" />
+        android:layout_gravity="center_horizontal" />
 
 </LinearLayout>

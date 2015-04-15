@@ -5,7 +5,7 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/kontinent"
+        android:id="@+id/item_tvNazov"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.62"
@@ -17,7 +17,7 @@
         android:paddingLeft="15dp"/>
 
     <TextView
-        android:id="@+id/pocStatov"
+        android:id="@+id/item_tvPocStatov"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.62"
@@ -25,7 +25,7 @@
         android:textColor="#ff8c00"
         android:textSize="16sp"
         android:paddingLeft="200dp"
-        android:layout_below="@id/kontinent"
+        android:layout_below="@id/item_tvNazov"
         android:textStyle="bold" />
 
 </RelativeLayout>

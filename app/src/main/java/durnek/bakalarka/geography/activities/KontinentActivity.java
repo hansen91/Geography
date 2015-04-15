@@ -3,17 +3,13 @@ package durnek.bakalarka.geography.activities;
 /**
  * Created by Lukas on 12. 3. 2015.
  */
-import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-
 import durnek.bakalarka.geography.R;
-import durnek.bakalarka.geography.application.OPrograme;
-import durnek.bakalarka.geography.classes.Kontinent;
 import durnek.bakalarka.geography.fragments.KontinentDetailFragment;
 import durnek.bakalarka.geography.fragments.KontinentListFragment;
 

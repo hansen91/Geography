@@ -55,7 +55,7 @@ public class KontinentAdapter extends ArrayAdapter<Kontinent> {
                     v = inflater.inflate(R.layout.item_view, null);
                     holder = new ViewHolder();
 
-                    holder.nazov = (TextView) v.findViewById(R.id.kontinent);
+                    holder.nazov = (TextView) v.findViewById(R.id.nazov);
                     holder.pocStatov = (TextView) v.findViewById(R.id.pocStatov);
                     holder.pocUzemi = (TextView) v.findViewById(R.id.pocUzemi);
                     holder.rozloha = (TextView) v.findViewById(R.id.rozloha);

@@ -25,7 +25,6 @@ public class DataBaseHelper
         extends SQLiteOpenHelper {
 
     public static String DB_PATH = "/data/data/durnek.bakalarka.geography/databases/";
-   // public static String DB_NAME = "db.sqlite";
     public static String DB_NAME = "svetDB.sqlite";
     public static final int DB_VERSION = 1;
 
@@ -162,7 +161,30 @@ public class DataBaseHelper
         return listContinents;
     }
 
-    public Kontinent getContinent(int id){
+    public List<Kontinent> getContinentsWithStatesNumber(){
+        List<Kontinent> listContinents = new ArrayList<Kontinent>();
+        SQLiteDatabase db = getWritableDatabase();
+
+        String select = "SELECT " + KEY_NAZOV + ", " + KEY_POC_STATOV + " FROM " + TB_KONTINENT;
+
+        //vysledok z curzora
+        Cursor c = getReadableDatabase().rawQuery(select,null);
+
+        if(c != null){
+            c.moveToFirst();
+            do{
+                listContinents.add(new Kontinent(
+                        c.getString(0),
+                        c.getInt(1))
+                );
+
+            } while (c.moveToNext());
+            c.close();
+        }
+        return listContinents;
+    }
+
+    /*public Kontinent getContinent(int id){
         SQLiteDatabase db = getReadableDatabase();
 
         Cursor c = db.query("Kontinent", new String[] { KEY_ID,
@@ -176,12 +198,12 @@ public class DataBaseHelper
                 Long.parseLong(c.getString(5)));
         // return kontinent
         return kontinent;
-    }
+    }*/
 
     public Kontinent dajKontinent(int id){
         Kontinent kontinent = null;
 
-        String select = "SELECT " + KEY_NAZOV + ", " + KEY_POC_STATOV + ", " +  //KEY_POC_UZEMI + ", " +
+        String select = "SELECT " + KEY_NAZOV + ", " + KEY_POC_STATOV + ", " +  KEY_POC_UZEMI + ", " +
                 KEY_ROZLOHA + ", "+ KEY_POPULACIA + " FROM " + TB_KONTINENT +
                 " WHERE " + KEY_ID + " = " + id;
 
@@ -195,68 +217,12 @@ public class DataBaseHelper
                     c.getString(1), Integer.parseInt(c.getString(2)),Integer.parseInt(c.getString(3)),Long.parseLong(c.getString(4)),
                     Long.parseLong(c.getString(5)));*/
             kontinent = new Kontinent(c.getString(0),
-                    Integer.parseInt(c.getString(1)),
-                    Long.parseLong(c.getString(2)),
-                    Long.parseLong(c.getString(3)));
+                    c.getInt(1), //Integer.parseInt(c.getString(1)),
+                    c.getInt(2), //Integer.parseInt(c.getString(2)),
+                    c.getLong(3), //Long.parseLong(c.getString(3)),
+                    c.getLong(4)); //Long.parseLong(c.getString(4)));
             c.close();
         }
         return kontinent;
     }
-
-
-
- /* public ArrayList<HashMap<String, String>> getAllContinents(){
-        ArrayList<HashMap<String,String>> listContinents;
-        listContinents = new ArrayList<HashMap<String,String>>();
-        String select = "SELECT * FROM " + TB_KONTINENT;
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor c = db.rawQuery(select,null);
-
-        //presun na prvy zaznam
-        if(c.moveToFirst()){
-            do{
-                HashMap<String,String> hm = new HashMap<String,String>();
-                hm.put(KEY_NAZOV, c.getString(1));
-                /*hm.put(KEY_POC_STATOV, c.getString(2));
-                hm.put(KEY_POC_UZEMI, c.getString(3));
-                hm.put(KEY_ROZLOHA, c.getString(4));
-                hm.put(KEY_POPULACIA, c.getString(5));
-                //listContinents.add(hm);
-            }while(c.moveToNext()); //kurzor na dalsi zaznam
-        }
-        return listContinents;
-    }
-
-    public HashMap<String,String> getContinent(String id){
-        HashMap<String,String> hm = new HashMap<String,String>();
-        SQLiteDatabase db = this.getReadableDatabase();
-        String select = "SELECT * FROM " + TB_KONTINENT + "WHERE KEY_ID ='"+id+"'";
-        Cursor c = db.rawQuery(select,null);
-        if(c.moveToFirst()){
-            do{
-                hm.put(KEY_NAZOV, c.getString(1));
-                hm.put(KEY_POC_STATOV, c.getString(2));
-                hm.put(KEY_POC_UZEMI, c.getString(3));
-                hm.put(KEY_ROZLOHA, c.getString(4));
-                hm.put(KEY_POPULACIA, c.getString(5));
-            }while(c.moveToNext());
-        }
-        return hm;
-    }
-
-
-   /* public Kontinent getKontinent(int id){
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query(TABULKA, new String[] {
-                id_kontinentu,nazov
-        }, id_kontinentu + "=?", new String[] {String.valueOf(id)},null,null,null );
-        if(cursor != null) cursor.moveToFirst();
-
-        Kontinent kontinent = new Kontinent(Integer.parseInt(cursor.getString(0)),
-                cursor.getString(1));
-        return kontinent;
-    }*/
-
-
-
 }

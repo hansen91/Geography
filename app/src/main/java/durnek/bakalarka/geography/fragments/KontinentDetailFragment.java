@@ -3,6 +3,7 @@ package durnek.bakalarka.geography.fragments;
 
 import android.os.Bundle;
 import android.app.Fragment;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -73,11 +74,11 @@ public class KontinentDetailFragment extends Fragment {
         });
 
 
-        ((TextView) v.findViewById(R.id.nazov)).setText(kontinent.getNazov());
-        ((TextView) v.findViewById(R.id.pocStatov)).setText(kontinent.getPocetStatov());
-        ((TextView) v.findViewById(R.id.pocUzemi)).setText(kontinent.getPocetUzemi());
-        ((TextView) v.findViewById(R.id.rozloha)).setText((int) kontinent.getRozloha());
-        ((TextView) v.findViewById(R.id.populacia)).setText((int) kontinent.getPopulacia());
+        ((TextView) v.findViewById(R.id.nazov)).setText("   " + kontinent.getNazov());
+        ((TextView) v.findViewById(R.id.pocStatov)).setText("Počet štátov:   " + kontinent.getPocetStatov());
+        ((TextView) v.findViewById(R.id.pocUzemi)).setText("Počet závislých území:   " + (kontinent.getPocetUzemi() == 0 ? "nemá územia" : kontinent.getPocetUzemi()));
+        ((TextView) v.findViewById(R.id.rozloha)).setText("Rozloha:    " + kontinent.getRozloha() + "  km2");
+        ((TextView) v.findViewById(R.id.populacia)).setText("Populácia:   " + kontinent.getPopulacia() + " obyv.");
 
       /*  try {
             // get input stream

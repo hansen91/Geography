@@ -13,7 +13,7 @@ import java.util.List;
 
 import durnek.bakalarka.geography.DataBaseHelper;
 import durnek.bakalarka.geography.R;
-import durnek.bakalarka.geography.adapters.KontinentAdapter;
+import durnek.bakalarka.geography.adapters.TestAdapter;
 import durnek.bakalarka.geography.classes.Kontinent;
 import durnek.bakalarka.geography.classes.Svet;
 
@@ -31,6 +31,7 @@ public class KontinentListFragment
    // ListView lvContinents;
     //ListAdapter adapter;
     private List<String> kontinentList;
+    private List<Kontinent> listWithStatesNumber;
     private OnKontinentSelectedListener mListener;
 
 
@@ -59,18 +60,18 @@ public class KontinentListFragment
             e.printStackTrace();
         }
 
-        //ArrayList<HashMap<String, String>> listContinent = dbHelper.getAllContinents();
         //List<String> listContinent = dbHelper.getAllContinents();
         kontinentList = dbHelper.getAllContinents();
+        listWithStatesNumber = dbHelper.getContinentsWithStatesNumber();
 
-        if(kontinentList != null) {
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
-                   R.layout.item_view, R.id.kontinent, kontinentList);
-           // ArrayAdapter<HashMap<String,String>> adapter = new ArrayAdapter<HashMap<String, String>>(getActivity(),
-                   // R.layout.item_view,R.id.kontinent,listContinent);
+        //if(kontinentList != null) {
+            /*ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
+                   R.layout.item_view, R.id.kontinent, kontinentList);*/
+
+            ArrayAdapter<Kontinent> adapter = new TestAdapter(getActivity(), R.layout.item_view, listWithStatesNumber);
 
             setListAdapter(adapter);
-        }
+        //}
     }
 
   /* public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
