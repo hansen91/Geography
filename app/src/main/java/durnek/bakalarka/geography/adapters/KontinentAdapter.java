@@ -1,8 +1,6 @@
 package durnek.bakalarka.geography.adapters;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,8 +8,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 
 import durnek.bakalarka.geography.R;
@@ -52,7 +48,7 @@ public class KontinentAdapter extends ArrayAdapter<Kontinent> {
                 ViewHolder holder;
                 if (v == null) {
                     LayoutInflater inflater = (LayoutInflater) appContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);     //LayoutInflater.from(parent.getContext());
-                    v = inflater.inflate(R.layout.item_view, null);
+                    v = inflater.inflate(R.layout.item_view_kontinent, null);
                     holder = new ViewHolder();
 
                     holder.nazov = (TextView) v.findViewById(R.id.nazov);

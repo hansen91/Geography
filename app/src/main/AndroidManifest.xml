@@ -35,6 +35,18 @@
             android:name=".kviz.Otazka"
             android:label="@string/title_activity_otazka" >
         </activity>
+        <activity
+            android:name=".activities.StatActivity"
+            android:label="@string/title_activity_stat" >
+        </activity>
+        <activity
+            android:name=".activities.StatDetailActivity"
+            android:label="@string/title_activity_activity_stat_detail" >
+        </activity>
+        <activity
+            android:name=".kviz.Vyhodnotenie"
+            android:label="Vyhodnotenie">
+            </activity>
     </application>
 
 </manifest>

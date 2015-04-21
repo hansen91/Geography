@@ -1,0 +1,90 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="durnek.bakalarka.geography.fragments.StatDetailFragment"
+    android:orientation="vertical"
+    android:background="@drawable/pozadie">
+
+    <TextView
+        android:id="@+id/tvNazov"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:text="@string/txtStat"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:layout_margin="2dp"
+        android:paddingLeft="5dp"
+        android:paddingTop="10dp"
+        android:textColor="@color/primary_dark_material_dark" />
+
+    <TextView
+        android:id="@+id/tvHlMesto"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:text="@string/txtHl_mesto"
+        android:gravity="center_vertical"
+        android:textSize="20sp"
+        android:paddingTop="10dp"
+        android:textStyle="bold|italic" />
+
+    <TextView
+        android:id="@+id/tvRozloha"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:text="@string/txtRozloha"
+        android:gravity="center_vertical"
+        android:textSize="20sp"
+        android:textStyle="bold|italic"
+        android:paddingTop="10dp"/>
+
+    <TextView
+        android:id="@+id/tvPopulacia"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:text="@string/txtPopulacia"
+        android:gravity="center_vertical"
+        android:textSize="20sp"
+        android:textStyle="bold|italic"
+        android:paddingTop="10dp"/>
+
+    <TextView
+        android:id="@+id/tvZnameMesta"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:text="@string/txtZnameMesta"
+        android:gravity="center_vertical"
+        android:textSize="20sp"
+        android:textStyle="bold|italic"
+        android:paddingTop="10dp"/>
+
+    <TextView
+        android:id="@+id/tvJazyk"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:text="@string/txtJazyk"
+        android:gravity="center_vertical"
+        android:textSize="20sp"
+        android:textStyle="bold|italic"
+        android:paddingTop="10dp"/>
+
+    <TextView
+        android:id="@+id/tvMena"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:text="@string/txtMena"
+        android:gravity="center_vertical"
+        android:textSize="20sp"
+        android:textStyle="bold|italic"
+        android:paddingTop="10dp"/>
+
+
+
+</LinearLayout>

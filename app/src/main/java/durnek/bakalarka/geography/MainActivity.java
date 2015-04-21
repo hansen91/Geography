@@ -15,6 +15,7 @@ import durnek.bakalarka.geography.activities.KontinentActivity;
 import durnek.bakalarka.geography.activities.KontinentDetailActivity;
 import durnek.bakalarka.geography.classes.Kontinent;
 import durnek.bakalarka.geography.fragments.KontinentDetailFragment;
+import durnek.bakalarka.geography.kviz.Otazka;
 
 
 public class MainActivity extends ActionBarActivity implements View.OnClickListener{
@@ -47,14 +48,16 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         Button kviz = (Button)findViewById(R.id.btnKviz);
         kviz.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
-
+                Intent intent = new Intent(view.getContext(), Otazka.class);
+                intent.putExtra("activity_stat", 0);
+                startActivity(intent);
             }
         });
 
         Button pexeso = (Button)findViewById(R.id.btnPexeso);
         pexeso.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
-
+                Toast.makeText(context,"Hra pexeso ešte nie je dokončená",Toast.LENGTH_LONG).show();
             }
         });
 

@@ -17,6 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import durnek.bakalarka.geography.classes.Kontinent;
+import durnek.bakalarka.geography.classes.Stat;
 
 /**
  * Created by Lukas on 28. 2. 2015.
@@ -32,13 +33,24 @@ public class DataBaseHelper
     public static final String TB_KONTINENT = "Kontinent";
     public static final String TB_STAT = "Stat";
 
-    //ATRIBUTY
+    //ATRIBUTY KONTINENTU
     private static final String KEY_ID = "id_kontinentu";
     private static final String KEY_NAZOV = "nazov";
     private static final String KEY_ROZLOHA = "rozloha";
     private static final String KEY_POC_STATOV = "poc_statov";
     private static final String KEY_POC_UZEMI = "zavisle_uzemia";
     private static final String KEY_POPULACIA = "poc_obyv";
+
+    //ATRIBUTY STATU
+    private static final String KEY_ID_STAT = "id_statu";
+    private static final String KEY_NAZOV_STAT = "nazov";
+    private static final String KEY_HL_MESTO = "hl_mesto";
+    private static final String KEY_ROZLOHA_STAT = "rozloha";
+    private static final String KEY_JEDNOTKA = "jednotka";
+    private static final String KEY_POPULACIA_STAT = "populacia";
+    private static final String KEY_MESTA = "zname_mesta";
+    private static final String KEY_JAZYK = "uradny_jazyk";
+    private static final String KEY_MENA = "mena";
 
 
     private SQLiteDatabase myDB;
@@ -137,30 +149,6 @@ public class DataBaseHelper
         }
     }
 
-
-    public List<String> getAllContinents(){
-        List<String> listContinents = new ArrayList<String>();
-        SQLiteDatabase db = getWritableDatabase();
-        Cursor c;
-
-        try{
-            c = db.rawQuery("SELECT * FROM " + TB_KONTINENT,null);
-            if(c == null) return null;
-
-            String nazov;
-            c.moveToFirst();
-            do{
-                nazov = c.getString(1);
-                listContinents.add(nazov);
-            } while (c.moveToNext());
-            c.close();
-        } catch (Exception e){
-            Log.e("chyba v selecte ", e.getMessage());
-        }
-        db.close();
-        return listContinents;
-    }
-
     public List<Kontinent> getContinentsWithStatesNumber(){
         List<Kontinent> listContinents = new ArrayList<Kontinent>();
         SQLiteDatabase db = getWritableDatabase();
@@ -183,6 +171,38 @@ public class DataBaseHelper
         }
         return listContinents;
     }
+
+   /* public ArrayList<Stat> staty(String company, String orderNumber) throws SQLException {
+
+
+        ArrayList<Stat> nieco = new ArrayList<Stat>();
+        Cursor mCursor =
+
+
+                myDB.query(true, TB_STAT, new String[] {
+                                KEY_NAZOV_STAT,},
+                        KEY_ID + "=?",
+                        new String[] {company,orderNumber},
+                        null, null, null , null);
+
+
+        if (mCursor.moveToFirst()) {
+            do {
+                OrderDetail orderDetail = new OrderDetail();
+                orderDetail.setItem(mCursor.getString(mCursor.getColumnIndexOrThrow(KEY_ITEM)));
+                orderDetail.setDescription(mCursor.getString(mCursor.getColumnIndexOrThrow(KEY_DESCRIPTION)));
+                orderDetail.setQuantity(mCursor.getString(mCursor.getColumnIndexOrThrow(KEY_QUANTITY)));
+                orderDetail.setPrice(mCursor.getString(mCursor.getColumnIndexOrThrow(KEY_PRICE)));
+                orderDetailList.add(orderDetail);
+            } while (mCursor.moveToNext());
+        }
+        if (mCursor != null && !mCursor.isClosed()) {
+            mCursor.close();
+        }
+        return orderDetailList;
+
+
+    }*/
 
     /*public Kontinent getContinent(int id){
         SQLiteDatabase db = getReadableDatabase();
@@ -224,5 +244,84 @@ public class DataBaseHelper
             c.close();
         }
         return kontinent;
+    }
+
+
+    public List<Stat> getAllStates(int idKontinentu){
+        List<Stat> listStates = new ArrayList<Stat>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        //String select = "SELECT " + KEY_NAZOV_STAT + " FROM " + TB_STAT;
+        /*String select = "SELECT  s.nazov "
+                + "FROM Stat s "
+                + "INNER JOIN Kontinent k ON k.id_kontinentu = s.id_kontinentu "
+                + " WHERE k.id_kontinentu = "
+                + idKontinentu
+                + " "
+                + " order BY s.nazov";
+*/
+        String select2 = "SELECT s." + KEY_NAZOV_STAT + ", s." + KEY_ID_STAT + " FROM " + TB_STAT + " s JOIN " + TB_KONTINENT +
+                " k ON " + "k." + KEY_ID + " = " + "s." +KEY_ID + " WHERE k." +KEY_ID + " = " + "'" + idKontinentu + "'";
+
+        //vysledok z curzora
+        Cursor c = db.rawQuery(select2,null);
+
+        //Log.w("select",select2);
+
+        if(c != null){
+            c.moveToFirst();
+            do{
+                listStates.add( new Stat(c.getInt(1), c.getString(0)) );
+
+            } while (c.moveToNext());
+            c.close();
+        }
+        return listStates;
+    }
+
+
+
+   /* public List<Stat> getStaty(String idKon) {
+        List<Stat> stat_list = new ArrayList<Stat>();
+
+        String selection = DataBaseHelper.KEY_ID + "=?";
+        String[] selectionArgs = { idKon };
+
+        Cursor cursor = myDB.query(TB_STAT,
+                new String[] { KEY_NAZOV_STAT }, selection,
+                selectionArgs, null, null, KEY_NAZOV_STAT);
+
+        while (cursor.moveToNext()) {
+            Stat stat_bin = new Stat();
+            stat_bin.setNazov(cursor.getString(0));
+            stat_list.add(stat_bin);
+        }
+        return stat_list;
+    }*/
+
+   public Stat dajStat(int id){
+        Stat stat = null;
+
+        String select = "SELECT " + KEY_NAZOV_STAT + ", " + KEY_HL_MESTO + ", " +  KEY_ROZLOHA_STAT + ", " + //" " + KEY_JEDNOTKA + ", " +
+                KEY_POPULACIA_STAT + ", "+ KEY_MESTA + ", " + KEY_JAZYK + ", " + KEY_MENA +  " FROM " + TB_STAT +
+                " WHERE " + KEY_ID_STAT + " = " + id;
+
+        //vysledok z curzora
+        Cursor c = getReadableDatabase().rawQuery(select,null);
+        if(c != null){
+            c.moveToFirst();
+
+            stat = new Stat(c.getString(0),
+                    c.getString(1),
+                    c.getLong(2), //Long.parseLong(c.getString(2)),
+                    //c.getString(3),
+                    c.getLong(3),  //Long.parseLong(c.getString(4)));
+                    c.getString(4),
+                    c.getString(5),
+                    c.getString(6));
+
+            c.close();
+        }
+        return stat;
     }
 }

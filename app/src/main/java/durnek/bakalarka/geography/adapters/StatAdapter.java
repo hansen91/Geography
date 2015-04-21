@@ -12,22 +12,21 @@ import java.util.List;
 
 import durnek.bakalarka.geography.R;
 import durnek.bakalarka.geography.classes.Kontinent;
+import durnek.bakalarka.geography.classes.Stat;
 
 /**
- * Created by Lukas on 14. 4. 2015.
+ * Created by Lukas on 15. 4. 2015.
  */
-public class TestAdapter
-    extends ArrayAdapter<Kontinent> {
-
-    public ArrayList<Kontinent> kontinents;
+public class StatAdapter  extends ArrayAdapter<Stat> {
+    public ArrayList<Stat> states;
     public LayoutInflater inflater;
     //public Context context;
 
-    public TestAdapter(Context context, int resource, List<Kontinent> objects) {
+    public StatAdapter(Context context, int resource, List<Stat> objects) {
         super(context, resource, objects);
 
         this.inflater = LayoutInflater.from(context);
-        this.kontinents = (ArrayList) objects;
+        this.states = (ArrayList) objects;
         //this.context = context;
     }
 
@@ -36,19 +35,17 @@ public class TestAdapter
         View itemView = convertView;
 
         if (itemView == null){
-            itemView = inflater.inflate(R.layout.item_view_kontinent, parent, false);
+            itemView = inflater.inflate(R.layout.item_view_stat, parent, false);
         }
 
-        Kontinent actKontintent = kontinents.get(position);
+        Stat actStat = states.get(position);
 
-    //naplnenie view
+        //naplnenie view
         //Nazov
         TextView txtvNazov = (TextView) itemView.findViewById(R.id.item_tvNazov);
-        txtvNazov.setText(actKontintent.getNazov());
+        txtvNazov.setText(actStat.getNazov());
 
-        //pocet statov
-        TextView txtvPocetStatov = (TextView) itemView.findViewById(R.id.item_tvPocStatov);
-        txtvPocetStatov.setText("Počet štátov: " + actKontintent.getPocetStatov());
+
 
 
         /**
@@ -69,4 +66,4 @@ public class TestAdapter
 
     }
 
-}//end TestAdapter
+}

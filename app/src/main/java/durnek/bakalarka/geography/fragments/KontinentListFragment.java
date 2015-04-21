@@ -3,10 +3,8 @@ package durnek.bakalarka.geography.fragments;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import java.io.IOException;
 import java.util.List;
@@ -15,7 +13,6 @@ import durnek.bakalarka.geography.DataBaseHelper;
 import durnek.bakalarka.geography.R;
 import durnek.bakalarka.geography.adapters.TestAdapter;
 import durnek.bakalarka.geography.classes.Kontinent;
-import durnek.bakalarka.geography.classes.Svet;
 
 
 /**
@@ -28,22 +25,8 @@ public class KontinentListFragment
 
 
     DataBaseHelper dbHelper;
-   // ListView lvContinents;
-    //ListAdapter adapter;
-    private List<String> kontinentList;
     private List<Kontinent> listWithStatesNumber;
     private OnKontinentSelectedListener mListener;
-
-
-    /*public interface Callbacks {
-        public void onItemSelected(long id);
-    }
-
-    private static Callbacks sDummyCallbacks = new Callbacks() {
-        @Override
-        public void onItemSelected(long id) {
-        }
-    };*/
 
 
     public KontinentListFragment(){
@@ -60,42 +43,18 @@ public class KontinentListFragment
             e.printStackTrace();
         }
 
-        //List<String> listContinent = dbHelper.getAllContinents();
-        kontinentList = dbHelper.getAllContinents();
         listWithStatesNumber = dbHelper.getContinentsWithStatesNumber();
 
         //if(kontinentList != null) {
             /*ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
-                   R.layout.item_view, R.id.kontinent, kontinentList);*/
+                   R.layout.item_view_kontinent, R.id.kontinent, kontinentList);*/
 
-            ArrayAdapter<Kontinent> adapter = new TestAdapter(getActivity(), R.layout.item_view, listWithStatesNumber);
+            ArrayAdapter<Kontinent> adapter = new TestAdapter(getActivity(), R.layout.item_view_kontinent, listWithStatesNumber);
 
             setListAdapter(adapter);
         //}
     }
 
-  /* public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_kontinent, container,false);
-
-        dbHelper = new DataBaseHelper(this.getActivity());
-        try {
-            dbHelper.createDataBase();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        lvContinents = (ListView)rootView.findViewById(R.id.list);
-        //lvContinents.setAdapter(new ArrayAdapter<String>(getActivity().getApplicationContext(), R.layout.fragment_kontinent));
-
-        List<String> listContinent = dbHelper.getAllContinents();
-
-        if (listContinent != null) {
-            adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),
-                    R.layout.item_view, R.id.kontinent, listContinent);
-            lvContinents.setAdapter(adapter);
-        }
-        return rootView;
-    }*/
     /*
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -129,9 +88,6 @@ public class KontinentListFragment
         public void onDetach () {
             super.onDetach();
             mListener = null;
-        /*
-        // Reset the active callbacks interface to the dummy implementation.
-        mCallbacks = sDummyCallbacks;*/
         }
 
        @Override

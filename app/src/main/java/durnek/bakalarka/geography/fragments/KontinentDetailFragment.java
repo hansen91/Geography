@@ -1,22 +1,19 @@
 package durnek.bakalarka.geography.fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 import java.io.IOException;
-import java.util.List;
-
 import durnek.bakalarka.geography.DataBaseHelper;
 import durnek.bakalarka.geography.R;
+import durnek.bakalarka.geography.activities.StatActivity;
 import durnek.bakalarka.geography.classes.Kontinent;
-import durnek.bakalarka.geography.classes.Svet;
 
 
 public class KontinentDetailFragment extends Fragment {
@@ -69,7 +66,11 @@ public class KontinentDetailFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(),"Tu sa zobrazia štáty", Toast.LENGTH_LONG).show();
+                //Toast.makeText(getActivity(),"Tu sa zobrazia štáty", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(getActivity().getApplicationContext(), StatActivity.class);
+                intent.putExtra("idKontinentu", idKontinentu);
+                startActivity(intent);
+
             }
         });
 

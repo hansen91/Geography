@@ -15,6 +15,16 @@
     <string name="title_activity_otazka">Kvíz na hlavné mestá</string>
     <string name="btnDoMenu">Naspäť do menu</string>
     <string name="btnPotvrd">Potvrď</string>
-
+    <string name="title_activity_stat">Štáty</string>
+    <string name="txtHl_mesto">Hlavné mesto:</string>
+    <string name="txtZnameMesta">Známe mestá:</string>
+    <string name="txtJazyk">Úradný jazyk:</string>
+    <string name="txtMena">Mena:</string>
+    <string name="txtStat">Štát:</string>
+    <string name="title_activity_activity_stat_detail">StatDetailActivity</string>
+    <string name="otazkaVyhodnotenie">otazka</string>
+    <string name="btnNaspat">späť</string>
+    <string name="txtTabulkaSkore">Tvoje skore</string>
+    <string name="txtSkore">100%</string>
 
 </resources>
