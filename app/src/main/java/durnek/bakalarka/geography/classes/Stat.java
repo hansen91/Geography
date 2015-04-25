@@ -9,17 +9,12 @@ import java.util.List;
 /**
  * Created by Lukas on 12. 3. 2015.
  */
-public class Stat
-        //implements Parcelable
-      {
+public class Stat implements Parcelable{
     private int _id;
     private String nazov;
     private String hlMesto;
     private long rozloha;
     private long populacia;
-    /*private List<String> mesta;
-    private List<String> jazyky;
-    private List<String> mena;*/
     private String mesta;
     private String jazyky;
     private String mena;
@@ -49,20 +44,17 @@ public class Stat
 
     }
 
-/*
+
     public Stat(Parcel in){
         nazov = in.readString();
         hlMesto = in.readString();
         rozloha = in.readLong();
         populacia = in.readLong();
-        mesta = new ArrayList<String>();
-        in.readList(mesta, null);
-        jazyky = new ArrayList<String>();
-        in.readList(jazyky, null);
-        mena = new ArrayList<String>();
-        in.readList(mena, null);
+        mesta = in.readString();
+        jazyky = in.readString();
+        mena = in.readString();
 
-    }*/
+    }
 
     public int get_id() {
         return _id;
@@ -96,25 +88,23 @@ public class Stat
     public String getMena() {
         return mena;
     }
-    /*
-    @Override
+
     public int describeContents() {
         return 0;
-    }*/
+    }
 
     public void setNazov(String nazov) {
         this.nazov = nazov;
     }
-/*
-    @Override
+
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(nazov);
         dest.writeString(hlMesto);
         dest.writeLong(rozloha);
         dest.writeLong(populacia);
-        dest.writeList(mesta);
-        dest.writeList(jazyky);
-        dest.writeList(mena);
+        dest.writeString(mesta);
+        dest.writeString(jazyky);
+        dest.writeString(mena);
 
     }
 
@@ -123,5 +113,5 @@ public class Stat
         public Stat createFromParcel(Parcel in){    return new Stat(in); }
 
         public Stat[] newArray(int size) { return new Stat[size]; }
-    };*/
+    };
 }

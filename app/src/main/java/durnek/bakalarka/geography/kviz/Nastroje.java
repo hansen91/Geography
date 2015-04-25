@@ -2,6 +2,8 @@ package durnek.bakalarka.geography.kviz;
 
 import android.app.Activity;
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Handler;
 import android.view.Gravity;
 import android.widget.ImageView;
@@ -12,8 +14,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+
+import durnek.bakalarka.geography.DataBaseHelper;
 import durnek.bakalarka.geography.R;
+import durnek.bakalarka.geography.classes.Stat;
 
 /**
  * Created by Lukas on 18. 4. 2015.
@@ -43,6 +49,19 @@ public class Nastroje extends Activity{
         return zoznam;
     }
 
+   /* public static List<String> vyberHlMesta(Context context){
+        List<String> aktOdpovede = new ArrayList<String>();
+        Cursor c = null;
+        DataBaseHelper db = new DataBaseHelper(context);
+
+        String select = "SELECT hl_mesto FROM Stat";
+        c = db.getReadableDatabase().rawQuery(select,null);
+        while(c.moveToNext()){
+            aktOdpovede.add(c.getString(c.getColumnIndex("hl_mesto")));
+        }
+        return aktOdpovede;
+    }*/
+
     /**
      * metóda, ktorá vráti počet otázok
      * @param context
@@ -51,9 +70,9 @@ public class Nastroje extends Activity{
      */
     public static int pocetOtazok(Context context,String subor){
         int pom;
+        int pocetRiadkov = 0;
         subor = "hlmesto";
         pom = 6;
-        int pocetRiadkov = 0;
         String riadok;
         int resID = context.getResources().getIdentifier(subor, "raw",
                 context.getPackageName());
@@ -97,7 +116,7 @@ public class Nastroje extends Activity{
 
         do{
             nahodneCislo = rnd.nextInt(hornaHranica) + 1;
-            for(int i = 0; i < velkost; i++){
+            for(int i = 0; i < poc; i++){
                 if(pole[i] == nahodneCislo){
                     opakujeSa = true;
                     break;
@@ -115,6 +134,38 @@ public class Nastroje extends Activity{
 
         return pole;
     }
+
+   /* public static int[] generujPoleOdpovedi(int velkostPola, int hornaHranica){
+        int[] poleOdpovedi = new int[velkostPola];
+
+        int poc = 3;
+        int nahCislo = 0;
+        int prvaOdpoved = 0;
+
+        boolean opakujeSa = false;
+
+        Random rnd = new Random();
+
+        do{
+            nahCislo = rnd.nextInt(hornaHranica)+1;
+            for(int i=0; i < poc; i++){
+
+                if(poleOdpovedi[i] == nahCislo){
+                    opakujeSa = true;
+                    break;
+                }
+            }
+            if(opakujeSa == false){
+                poleOdpovedi[poc] = nahCislo;
+                poc++;
+            }else
+                    opakujeSa = false;
+
+        }while(poc < velkostPola);
+        return poleOdpovedi;
+    }*/
+
+
 
     public static void zobrazSpravne(Context context){
         final Toast toast = new Toast(context.getApplicationContext());

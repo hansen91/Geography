@@ -46,7 +46,7 @@ public class DataBaseHelper
     private static final String KEY_NAZOV_STAT = "nazov";
     private static final String KEY_HL_MESTO = "hl_mesto";
     private static final String KEY_ROZLOHA_STAT = "rozloha";
-    private static final String KEY_JEDNOTKA = "jednotka";
+   // private static final String KEY_JEDNOTKA = "jednotka";
     private static final String KEY_POPULACIA_STAT = "populacia";
     private static final String KEY_MESTA = "zname_mesta";
     private static final String KEY_JAZYK = "uradny_jazyk";
@@ -172,53 +172,6 @@ public class DataBaseHelper
         return listContinents;
     }
 
-   /* public ArrayList<Stat> staty(String company, String orderNumber) throws SQLException {
-
-
-        ArrayList<Stat> nieco = new ArrayList<Stat>();
-        Cursor mCursor =
-
-
-                myDB.query(true, TB_STAT, new String[] {
-                                KEY_NAZOV_STAT,},
-                        KEY_ID + "=?",
-                        new String[] {company,orderNumber},
-                        null, null, null , null);
-
-
-        if (mCursor.moveToFirst()) {
-            do {
-                OrderDetail orderDetail = new OrderDetail();
-                orderDetail.setItem(mCursor.getString(mCursor.getColumnIndexOrThrow(KEY_ITEM)));
-                orderDetail.setDescription(mCursor.getString(mCursor.getColumnIndexOrThrow(KEY_DESCRIPTION)));
-                orderDetail.setQuantity(mCursor.getString(mCursor.getColumnIndexOrThrow(KEY_QUANTITY)));
-                orderDetail.setPrice(mCursor.getString(mCursor.getColumnIndexOrThrow(KEY_PRICE)));
-                orderDetailList.add(orderDetail);
-            } while (mCursor.moveToNext());
-        }
-        if (mCursor != null && !mCursor.isClosed()) {
-            mCursor.close();
-        }
-        return orderDetailList;
-
-
-    }*/
-
-    /*public Kontinent getContinent(int id){
-        SQLiteDatabase db = getReadableDatabase();
-
-        Cursor c = db.query("Kontinent", new String[] { KEY_ID,
-                        KEY_NAZOV, KEY_POC_STATOV, KEY_POC_UZEMI, KEY_ROZLOHA, KEY_POPULACIA }, KEY_ID + "=?",
-                new String[] { String.valueOf(id) }, null, null, null, null);
-        if (c != null)
-            c.moveToFirst();
-
-        Kontinent kontinent = new Kontinent(Integer.parseInt(c.getString(0)),
-                c.getString(1), Integer.parseInt(c.getString(2)),Integer.parseInt(c.getString(3)),Long.parseLong(c.getString(4)),
-                Long.parseLong(c.getString(5)));
-        // return kontinent
-        return kontinent;
-    }*/
 
     public Kontinent dajKontinent(int id){
         Kontinent kontinent = null;
@@ -231,11 +184,6 @@ public class DataBaseHelper
         Cursor c = getReadableDatabase().rawQuery(select,null);
         if(c != null){
             c.moveToFirst();
-
-            /*
-            kontinent = new Kontinent(Integer.parseInt(c.getString(0)),
-                    c.getString(1), Integer.parseInt(c.getString(2)),Integer.parseInt(c.getString(3)),Long.parseLong(c.getString(4)),
-                    Long.parseLong(c.getString(5)));*/
             kontinent = new Kontinent(c.getString(0),
                     c.getInt(1), //Integer.parseInt(c.getString(1)),
                     c.getInt(2), //Integer.parseInt(c.getString(2)),
@@ -251,22 +199,11 @@ public class DataBaseHelper
         List<Stat> listStates = new ArrayList<Stat>();
         SQLiteDatabase db = this.getReadableDatabase();
 
-        //String select = "SELECT " + KEY_NAZOV_STAT + " FROM " + TB_STAT;
-        /*String select = "SELECT  s.nazov "
-                + "FROM Stat s "
-                + "INNER JOIN Kontinent k ON k.id_kontinentu = s.id_kontinentu "
-                + " WHERE k.id_kontinentu = "
-                + idKontinentu
-                + " "
-                + " order BY s.nazov";
-*/
-        String select2 = "SELECT s." + KEY_NAZOV_STAT + ", s." + KEY_ID_STAT + " FROM " + TB_STAT + " s JOIN " + TB_KONTINENT +
+        String select = "SELECT s." + KEY_NAZOV_STAT + ", s." + KEY_ID_STAT + " FROM " + TB_STAT + " s JOIN " + TB_KONTINENT +
                 " k ON " + "k." + KEY_ID + " = " + "s." +KEY_ID + " WHERE k." +KEY_ID + " = " + "'" + idKontinentu + "'";
 
         //vysledok z curzora
-        Cursor c = db.rawQuery(select2,null);
-
-        //Log.w("select",select2);
+        Cursor c = db.rawQuery(select,null);
 
         if(c != null){
             c.moveToFirst();
@@ -277,27 +214,7 @@ public class DataBaseHelper
             c.close();
         }
         return listStates;
-    }
-
-
-
-   /* public List<Stat> getStaty(String idKon) {
-        List<Stat> stat_list = new ArrayList<Stat>();
-
-        String selection = DataBaseHelper.KEY_ID + "=?";
-        String[] selectionArgs = { idKon };
-
-        Cursor cursor = myDB.query(TB_STAT,
-                new String[] { KEY_NAZOV_STAT }, selection,
-                selectionArgs, null, null, KEY_NAZOV_STAT);
-
-        while (cursor.moveToNext()) {
-            Stat stat_bin = new Stat();
-            stat_bin.setNazov(cursor.getString(0));
-            stat_list.add(stat_bin);
-        }
-        return stat_list;
-    }*/
+ }
 
    public Stat dajStat(int id){
         Stat stat = null;

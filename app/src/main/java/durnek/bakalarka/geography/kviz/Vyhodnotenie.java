@@ -24,16 +24,17 @@ public class Vyhodnotenie extends Activity {
     List<String> listDataHeader;
     HashMap<String, List<String>> listDataChild;
     ArrayList<String> list_all = new ArrayList<>();
-    List<String> arr;
+    List<String> arr;   //pole do ktoreho pridavam correct alebo incorrect odpovede
     List <Drawable> listDataPictures;
     List<List<String>> dataList;
 
-    boolean[] poleSpravnychOdpovedi;
+    boolean[] poleSoSpravnymiOdpovedami;
     List<Boolean> spravneOdpovede;
     int pocetSpravnychOdpovedi=0;
     int konst;
     int[] pole;
     String  nazovObrazka;
+    TextView percento;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,31 +43,33 @@ public class Vyhodnotenie extends Activity {
 
         expListView = (ExpandableListView) findViewById(R.id.lvExp);
 
-        TextView percento = (TextView) findViewById(R.id.percenta);
+        percento = (TextView) findViewById(R.id.percenta);
+
+        Bundle bund = getIntent().getExtras();
+        double pocOtazok = bund.getInt("poc_otazok");
+        pole = new int[bund.getInt("poc_otazok")];   // pole s vybratým počtom otázok
+
 
         Bundle bund2 = getIntent().getExtras();
-        double pocetOtazok = bund2.getInt("poc_otazok");
+        pole = bund2.getIntArray("cisla_otazok");  //do poľa vložíme čísla otázok
 
-        pole = new int[bund2.getInt("poc_otazok")];
 
         Bundle bund3 = getIntent().getExtras();
-        pole = bund3.getIntArray("cisla_otazok");
+        konst = bund3.getInt("konstanta_na_ocislovanie_zloziek");  //vyberieme si konštantu
 
+
+        poleSoSpravnymiOdpovedami = new boolean[bund.getInt("poc_otazok")];
         Bundle bund4 = getIntent().getExtras();
-        konst = bund4.getInt("konstanta");
+        poleSoSpravnymiOdpovedami = bund4.getBooleanArray("spravnost_odpovedi");
 
-        poleSpravnychOdpovedi = new boolean[bund2.getInt("poc_otazok")];
-        Bundle bund5 = getIntent().getExtras();
-        poleSpravnychOdpovedi = bund5.getBooleanArray("spravnost_odpovedi");
-
-        spravneOdpovede = new ArrayList<Boolean>();
+        spravneOdpovede = new ArrayList<Boolean>();  //tu sa nachadzaju len správne odpovede
         for (int s = 0; s < pole.length; s++) {
-            if (poleSpravnychOdpovedi[s] == true) spravneOdpovede.add(true);
+            if (poleSoSpravnymiOdpovedami[s] == true) spravneOdpovede.add(true);
             else spravneOdpovede.add(false);
         }
 
-        //pripravime si data do zoznamu
-        prepareListData();
+        //priprava dat do expandableListView
+        dataVZozname();
 
         listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataPictures, spravneOdpovede, listDataChild);
 
@@ -89,18 +92,18 @@ public class Vyhodnotenie extends Activity {
             }
         });
 
-        for(int i=0; i < pocetOtazok; i++){ //pocet spravnych odpovedi
-            if(poleSpravnychOdpovedi[i]) pocetSpravnychOdpovedi++;
+        for(int i=0; i < pocOtazok; i++){ //pocet spravnych odpovedi
+            if(poleSoSpravnymiOdpovedami[i]) pocetSpravnychOdpovedi++;
 
-           percento.setText(String.format("%.0f" , pocetSpravnychOdpovedi/pocetOtazok*100) + "%");
+           percento.setText(String.format("%.0f" , pocetSpravnychOdpovedi/pocOtazok*100) + "%");
         }
     }
-        private void prepareListData(){
-             listDataHeader = new ArrayList<>();
+        private void dataVZozname(){
+            listDataHeader = new ArrayList<String>();
             listDataChild = new HashMap<String, List<String>>();
             listDataPictures = new ArrayList<Drawable>();
 
-            //nacitaj do ArrayListu(typ)
+            //nacitaj do ArrayListu otazku
             list_all = Nastroje.nacitajOtazkuZoSuboru(this,"hlmesto");
             dataList = new ArrayList<List<String>>();
 
@@ -111,7 +114,7 @@ public class Vyhodnotenie extends Activity {
                 nazovObrazka = String.valueOf(list_all.get(pole[r]*konst - 6));
                 if (nazovObrazka==list_all.get(0)) nazovObrazka="f_1";
                 int resID = getResources().getIdentifier(nazovObrazka , "drawable", getPackageName());
-                Drawable draw = getResources().getDrawable(resID );
+                Drawable draw = getResources().getDrawable(resID);
                 listDataPictures.add(draw);
                 listDataHeader.add((r+1) + ") " + list_all.get(pole[r]*konst - 5));
                 arr.add(" ✔" + list_all.get(pole[r]*konst - 4));

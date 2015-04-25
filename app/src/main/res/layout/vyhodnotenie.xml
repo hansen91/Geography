@@ -11,20 +11,21 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="@string/txtTabulkaSkore"
+        android:text="@string/txtVyhodnotenie"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="30sp" />
+        android:textSize="30sp"
+        android:textStyle="bold|italic" />
 
     <TextView
         android:id="@+id/percenta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/Skore"
-        android:layout_below="@+id/Skore"
         android:gravity="center"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="70sp"
-        android:text="@string/txtSkore" />
+        android:text="@string/txtSkore"
+        android:layout_below="@+id/Skore"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:id="@+id/buttonDoMenu"
@@ -43,13 +44,9 @@
 
         <ExpandableListView
             android:id="@+id/lvExp"
-            android:layout_width="match_parent"
-            android:layout_height="412dp"
-
-           >
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
         </ExpandableListView>
 
     </LinearLayout>
-
-
 </RelativeLayout>

@@ -3,8 +3,12 @@ package durnek.bakalarka.geography.kviz;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.provider.ContactsContract;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -17,8 +21,12 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import durnek.bakalarka.geography.DataBaseHelper;
 import durnek.bakalarka.geography.R;
+import durnek.bakalarka.geography.classes.Kontinent;
+import durnek.bakalarka.geography.classes.Stat;
 
 public class Otazka extends Activity {
     private ArrayList<String> otazky = new ArrayList<>();
@@ -33,11 +41,12 @@ public class Otazka extends Activity {
     int spravne = 0;
     Button hlMenu,potvrd;
     RadioButton r0,r1,r2,r3;
-    TextView otazka;
+    TextView otazka,poradie;
     RadioGroup group;
     String test;
+    DataBaseHelper db = null;
 
-    final CharSequence[] questions = { " 5 ", " 10 ", " 15 "};
+    final CharSequence[] questions = { " 5 ", " 10 ", " 15 ", " 20 "};
 
 
     @Override
@@ -88,7 +97,7 @@ public class Otazka extends Activity {
     }
 
     public void potvrdzovacieOkno(){
-        new AlertDialog.Builder(this).setTitle("Koniec kvizu").setMessage("Určite sa chcete vrátiť do menu?")
+        new AlertDialog.Builder(this).setTitle("Koniec kvízu").setMessage("Určite sa chcete vrátiť do menu?")
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -108,7 +117,7 @@ public class Otazka extends Activity {
         if(aktOtazka == cislaOtazok.length){
 
         Intent i = new Intent(this, Vyhodnotenie.class);
-            i.putExtra("meno_testu",test);
+            i.putExtra("test",test);
             i.putExtra("poc_otazok",pocOtazok);
             i.putExtra("cisla_otazok",cislaOtazok);
             i.putExtra("spravnost_odpovedi",poleSpravnychOdpovedi);
@@ -158,18 +167,25 @@ public class Otazka extends Activity {
                                 generujANastavViditelnost();
                                 dialog.dismiss();
                                 break;
+
+                            case 3:
+                                pocOtazok = 20;
+                                generujANastavViditelnost();
+                                dialog.dismiss();
+                                break;
                         }
                     }
                 }).show();
     }
 
-    public void polozOtazku(){
-       // getActionBar().setTitle("Hlavné mestá " + (aktOtazka + 1) + "/" + pocOtazok);
-       // odpovede = Nastroje.generujPoleOtazok(4,4);
+    public void polozOtazku() {
+        // getActionBar().setTitle("Hlavné mestá " + (aktOtazka + 1) + "/" + pocOtazok);
+        odpovede = Nastroje.generujPoleOtazok(4, 4);
 
-        if(test == "hlmesto") {
 
-            String pom = String.valueOf(otazky.get((cislaOtazok[aktOtazka] * konstanta) - 6));
+        if (test == "hlmesto") {
+
+             String pom = String.valueOf(otazky.get((cislaOtazok[aktOtazka] * konstanta) - 6));  //vlajka
             if (pom == otazky.get(0))
                 pom = "f_1";
 
@@ -177,18 +193,18 @@ public class Otazka extends Activity {
 
             obr.setImageDrawable(getResources().getDrawable(resID));
         }
-        otazka.setText(otazky.get((cislaOtazok[aktOtazka] * konstanta) - 5));
+        otazka.setText(otazky.get((cislaOtazok[aktOtazka] * konstanta) - 5));   //otazka
 
-        r0.setText("A: " + otazky.get((cislaOtazok[aktOtazka] * konstanta) - odpovede[0]));
-        r1.setText("B: " + otazky.get((cislaOtazok[aktOtazka] * konstanta) - odpovede[1]));
-        r2.setText("C: " + otazky.get((cislaOtazok[aktOtazka] * konstanta) - odpovede[2]));
-        r3.setText("D: " + otazky.get((cislaOtazok[aktOtazka] * konstanta) - odpovede[3]));
+            r0.setText("A:  " + otazky.get((cislaOtazok[aktOtazka] * konstanta) - odpovede[0]));
+            r1.setText("B:  " + otazky.get((cislaOtazok[aktOtazka] * konstanta) - odpovede[1]));
+            r2.setText("C:  " + otazky.get((cislaOtazok[aktOtazka] * konstanta) - odpovede[2]));
+            r3.setText("D:  " + otazky.get((cislaOtazok[aktOtazka] * konstanta) - odpovede[3]));
 
-        group.clearCheck();
+            group.clearCheck();
 
-        for(int j = 0; j < 4; j++){
-            if(odpovede[j] == 4)
-                spravne = j;
+        for(int k = 0; k < 4; k++){   //spravna odpoved je ta kde index je rovny 4
+            if(odpovede[k] == 4)
+                spravne = k;
         }
 
     }

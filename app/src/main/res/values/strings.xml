@@ -24,7 +24,7 @@
     <string name="title_activity_activity_stat_detail">StatDetailActivity</string>
     <string name="otazkaVyhodnotenie">otazka</string>
     <string name="btnNaspat">späť</string>
-    <string name="txtTabulkaSkore">Tvoje skore</string>
     <string name="txtSkore">100%</string>
+    <string name="txtVyhodnotenie">Vyhodnotenie kvízu</string>
 
 </resources>

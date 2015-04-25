@@ -25,17 +25,16 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     private List<String> _listDataHeader;
     private List<Drawable> _listObrazky;
     private List<Boolean> _spravneOdpovede;
-
     private HashMap<String, List<String>> _listDataChild;
 
-    public ExpandableListAdapter(Context _context, List<String> _listDataHeader,
-                                 List<Drawable> _listObrazky, List<Boolean> _spravneOdpovede,
-                                 HashMap<String, List<String>> _listDataChild) {
+    public ExpandableListAdapter(Context _context, List<String> listDataHeader,
+                                 List<Drawable> listObrazky, List<Boolean> spravneOdpovede,
+                                 HashMap<String, List<String>> listDataChild) {
         this._context = _context;
-        this._listDataHeader = _listDataHeader;
-        this._listObrazky = _listObrazky;
-        this._spravneOdpovede = _spravneOdpovede;
-        this._listDataChild = _listDataChild;
+        this._listDataHeader = listDataHeader;
+        this._listObrazky = listObrazky;
+        this._spravneOdpovede = spravneOdpovede;
+        this._listDataChild = listDataChild;
     }
 
     @Override
@@ -108,7 +107,17 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+    public View getChildView(int groupPosition,final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+        final String childText = (String) getChild(groupPosition, childPosition);
+
+        if(convertView == null){
+            LayoutInflater inflater = (LayoutInflater) this._context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            convertView = inflater.inflate(R.layout.list_item,null);
+        }
+
+        TextView txtListChild = (TextView) convertView.findViewById(R.id.lblListItem);
+        txtListChild.setText(childText);
+
         return convertView;
     }
 
