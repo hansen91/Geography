@@ -25,6 +25,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
+        <activity android:name=".application.OPrograme"
+                  android:label="O programe" >
+        </activity>
         <activity
             android:name=".activities.KontinentDetailActivity"
             android:label=".KontinentDetailActivity">

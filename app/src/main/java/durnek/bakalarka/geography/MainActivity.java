@@ -3,16 +3,20 @@ package durnek.bakalarka.geography;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import durnek.bakalarka.geography.activities.KontinentActivity;
 import durnek.bakalarka.geography.activities.KontinentDetailActivity;
+import durnek.bakalarka.geography.application.OPrograme;
 import durnek.bakalarka.geography.classes.Kontinent;
 import durnek.bakalarka.geography.fragments.KontinentDetailFragment;
 import durnek.bakalarka.geography.kviz.Otazka;
@@ -21,6 +25,7 @@ import durnek.bakalarka.geography.kviz.Otazka;
 public class MainActivity extends ActionBarActivity implements View.OnClickListener{
     Context context = this;
     private boolean mDualPane;
+    private TextView txtOprograme;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +95,9 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent intent = new Intent(this,OPrograme.class);
+            intent.putExtra("download","download");
+            startActivityForResult(intent, 222);
             return true;
         }
 

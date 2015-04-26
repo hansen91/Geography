@@ -26,5 +26,6 @@
     <string name="btnNaspat">späť</string>
     <string name="txtSkore">100%</string>
     <string name="txtVyhodnotenie">Vyhodnotenie kvízu</string>
+    <string name="btnOPrograme">O programe</string>
 
 </resources>
