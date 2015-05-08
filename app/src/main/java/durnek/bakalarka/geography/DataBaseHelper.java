@@ -219,7 +219,7 @@ public class DataBaseHelper
    public Stat dajStat(int id){
         Stat stat = null;
 
-        String select = "SELECT " + KEY_NAZOV_STAT + ", " + KEY_HL_MESTO + ", " +  KEY_ROZLOHA_STAT + ", " + //" " + KEY_JEDNOTKA + ", " +
+        String select = "SELECT " + KEY_NAZOV_STAT + ", " + KEY_HL_MESTO + ", " +  KEY_ROZLOHA_STAT + ", " +
                 KEY_POPULACIA_STAT + ", "+ KEY_MESTA + ", " + KEY_JAZYK + ", " + KEY_MENA +  " FROM " + TB_STAT +
                 " WHERE " + KEY_ID_STAT + " = " + id;
 

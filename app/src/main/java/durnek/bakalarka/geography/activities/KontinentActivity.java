@@ -17,9 +17,7 @@ public class KontinentActivity
     extends ActionBarActivity
     implements KontinentListFragment.OnKontinentSelectedListener {
 
-    private static final String VYBRANY_KONTINENT = "vybrany_kontinent";
     private boolean mDualPane;
-    private long vybranyKontinent = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

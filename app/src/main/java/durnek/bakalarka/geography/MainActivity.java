@@ -59,7 +59,8 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             }
         });
 
-        Button pexeso = (Button)findViewById(R.id.btnPexeso);
+
+        Button pexeso = (Button)findViewById(R.id.btnKvizStaty);
         pexeso.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
                 Toast.makeText(context,"Hra pexeso ešte nie je dokončená",Toast.LENGTH_LONG).show();

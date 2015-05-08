@@ -11,7 +11,7 @@ import java.util.List;
 
 import durnek.bakalarka.geography.DataBaseHelper;
 import durnek.bakalarka.geography.R;
-import durnek.bakalarka.geography.adapters.TestAdapter;
+import durnek.bakalarka.geography.adapters.KontinentAdapter;
 import durnek.bakalarka.geography.classes.Kontinent;
 
 
@@ -20,9 +20,6 @@ import durnek.bakalarka.geography.classes.Kontinent;
  */
 public class KontinentListFragment
     extends ListFragment {
-    //private static Parcelable mListViewScrollPos = null;
-   // private Callbacks mCallbacks = sDummyCallbacks; //prepinanie fragmentov
-
 
     DataBaseHelper dbHelper;
     private List<Kontinent> listWithStatesNumber;
@@ -45,23 +42,10 @@ public class KontinentListFragment
 
         listWithStatesNumber = dbHelper.getContinentsWithStatesNumber();
 
-        //if(kontinentList != null) {
-            /*ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
-                   R.layout.item_view_kontinent, R.id.kontinent, kontinentList);*/
-
-            ArrayAdapter<Kontinent> adapter = new TestAdapter(getActivity(), R.layout.item_view_kontinent, listWithStatesNumber);
+            ArrayAdapter<Kontinent> adapter = new KontinentAdapter(getActivity(), R.layout.item_view_kontinent, listWithStatesNumber);
 
             setListAdapter(adapter);
-        //}
-    }
-
-    /*
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-    }
-    }*/
+     }
 
         @Override
         public void onAttach (Activity activity) {
@@ -72,17 +56,6 @@ public class KontinentListFragment
                 throw new ClassCastException(activity.toString() + "nie je implementovany listener OnKontinentSelectedListener");
             }
         }
-
-        // Activities containing this fragment must implement its callbacks.
-     /*   if (!(activity instanceof Callbacks)) {
-            throw new IllegalStateException(
-                    "Activity must implement fragment's callbacks.");
-        }
-
-        mCallbacks = (Callbacks) activity;
-        */
-
-            // setListAdapter(aAdapter);
 
         @Override
         public void onDetach () {

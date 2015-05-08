@@ -27,7 +27,7 @@ import durnek.bakalarka.geography.classes.Stat;
 public class Nastroje extends Activity{
 
     public static ArrayList<String> nacitajOtazkuZoSuboru(Context context,String subor){
-        ArrayList zoznam = new ArrayList<String>();
+        ArrayList<String> zoznam = new ArrayList<String>();
         String riadok;
         int resID = context.getResources().getIdentifier(subor, "raw" ,context.getPackageName());
         InputStream in = context.getResources().openRawResource(resID);
@@ -49,18 +49,38 @@ public class Nastroje extends Activity{
         return zoznam;
     }
 
-   /* public static List<String> vyberHlMesta(Context context){
-        List<String> aktOdpovede = new ArrayList<String>();
+    static class Stat
+    {
+        private String nazov;
+        private int id_statu;
+
+        public String getNazov() {
+            return nazov;
+        }
+
+        public int getIdStatu() {
+            return id_statu;
+        }
+
+        Stat(int idStatu, String nazov) {
+            this.id_statu = idStatu;
+            this.nazov = nazov;
+
+        }
+    }
+
+    public static List<Stat> vyberStatov(Context context){
+        List<Stat> aktOdpovede = new ArrayList<Stat>();
         Cursor c = null;
         DataBaseHelper db = new DataBaseHelper(context);
 
-        String select = "SELECT hl_mesto FROM Stat";
+        String select = "SELECT id_statu,nazov FROM Stat";
         c = db.getReadableDatabase().rawQuery(select,null);
         while(c.moveToNext()){
-            aktOdpovede.add(c.getString(c.getColumnIndex("hl_mesto")));
+            aktOdpovede.add(new Stat(c.getInt(0),c.getString(1)));
         }
         return aktOdpovede;
-    }*/
+    }
 
     /**
      * metóda, ktorá vráti počet otázok
@@ -104,7 +124,7 @@ public class Nastroje extends Activity{
      * @param hornaHranica
      * @return
      */
-    public static int[] generujPoleOtazok(int velkost,int hornaHranica){
+    public static int[] generujCisla(int velkost, int hornaHranica){
         int pole[] = new int[velkost];
 
         int poc = 0; //pomocna premenna pocitadlo

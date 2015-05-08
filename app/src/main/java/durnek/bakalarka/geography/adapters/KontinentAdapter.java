@@ -5,87 +5,68 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import durnek.bakalarka.geography.R;
 import durnek.bakalarka.geography.classes.Kontinent;
 
-
 /**
- * Created by Lukas on 6. 3. 2015.
+ * Created by Lukas on 14. 4. 2015.
  */
-public class KontinentAdapter extends ArrayAdapter<Kontinent> {
+public class KontinentAdapter
+    extends ArrayAdapter<Kontinent> {
 
-    private class ViewHolder{
-        ImageView img;
-        TextView nazov;
-        TextView pocStatov;
-        TextView pocUzemi;
-        TextView rozloha;
-        TextView populacia;
-    }
-
-    List<Kontinent> listCont;
-    Context appContext;
+    public ArrayList<Kontinent> kontinents;
+    public LayoutInflater inflater;
+    //public Context context;
 
     public KontinentAdapter(Context context, int resource, List<Kontinent> objects) {
         super(context, resource, objects);
-        listCont = objects;
-        this.appContext = context;
+
+        this.inflater = LayoutInflater.from(context);
+        this.kontinents = (ArrayList) objects;
+        //this.context = context;
     }
 
-            @Override
-            public int getCount() {
-                return listCont.size();
-            }
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        View itemView = convertView;
 
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
-                View v = convertView;
-                ViewHolder holder;
-                if (v == null) {
-                    LayoutInflater inflater = (LayoutInflater) appContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);     //LayoutInflater.from(parent.getContext());
-                    v = inflater.inflate(R.layout.item_view_kontinent, null);
-                    holder = new ViewHolder();
+        if (itemView == null){
+            itemView = inflater.inflate(R.layout.item_view_kontinent, parent, false);
+        }
 
-                    holder.nazov = (TextView) v.findViewById(R.id.nazov);
-                    holder.pocStatov = (TextView) v.findViewById(R.id.pocStatov);
-                    holder.pocUzemi = (TextView) v.findViewById(R.id.pocUzemi);
-                    holder.rozloha = (TextView) v.findViewById(R.id.rozloha);
-                    holder.populacia = (TextView) v.findViewById(R.id.populacia);
-                    //holder.img = (ImageView) v.findViewById(R.id.obrazok);
-                    v.setTag(holder);
-                } else {
-                    holder = (ViewHolder) v.getTag();
-                }
-                    holder.nazov.setText(listCont.get(position).getNazov());
-                    holder.pocStatov.setText(listCont.get(position).getPocetStatov());
-                    holder.pocUzemi.setText(listCont.get(position).getPocetUzemi());
-                    holder.rozloha.setText((int) listCont.get(position).getRozloha());
-                    holder.populacia.setText((int) listCont.get(position).getPopulacia());
+        Kontinent actKontintent = kontinents.get(position);
 
-           /*     try {
-                    // get input stream
-                    InputStream ims = appContext.getAssets().open(listCont.get(position).previewPic);
-                    // load image as Drawable
-                    Drawable d = Drawable.createFromStream(ims, null);
-                    // set image to ImageView
-                    holder.img.setImageDrawable(d);
-                } catch (IOException ex) {
-                    Log.e("Parse", "Error nacitania obrazku");
-                }*/
+    //naplnenie view
+        //Nazov
+        TextView txtvNazov = (TextView) itemView.findViewById(R.id.item_tvNazov);
+        txtvNazov.setText(actKontintent.getNazov());
+
+        //pocet statov
+        TextView txtvPocetStatov = (TextView) itemView.findViewById(R.id.item_tvPocStatov);
+        txtvPocetStatov.setText("Počet štátov: " + actKontintent.getPocetStatov());
 
 
+        /**
+         * ku statu
+         */
+        /*ImageView imgvVlajka = (ImageView) itemView.findViewById(R.id.item_imgvVlajka);
 
-                return v;
-            }
+        String s = "R.drawable.f_"+actStat.getId(); //res/drawable/f_1.png
+        Drawable d = Drawable.createFromPath(s);
 
+        imgvVlajka.setImageDrawable(d);
 
+        Resources resources = context.getResources();
+        int resId = resources.getIdentifier(name, "drawable", context.getPackageName());
+        imgvVlajka.setImageResource(resId);*/
 
+        return itemView;
 
+    }
 
-
-}
+}//end TestAdapter

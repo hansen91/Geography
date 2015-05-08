@@ -2,17 +2,9 @@ package durnek.bakalarka.geography.kviz;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.provider.ContactsContract;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -21,12 +13,9 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import durnek.bakalarka.geography.DataBaseHelper;
 import durnek.bakalarka.geography.R;
-import durnek.bakalarka.geography.classes.Kontinent;
-import durnek.bakalarka.geography.classes.Stat;
 
 public class Otazka extends Activity {
     private ArrayList<String> otazky = new ArrayList<>();
@@ -180,7 +169,7 @@ public class Otazka extends Activity {
 
     public void polozOtazku() {
         // getActionBar().setTitle("Hlavné mestá " + (aktOtazka + 1) + "/" + pocOtazok);
-        odpovede = Nastroje.generujPoleOtazok(4, 4);
+        odpovede = Nastroje.generujCisla(4, 4);
 
 
         if (test == "hlmesto") {
@@ -213,7 +202,7 @@ public class Otazka extends Activity {
         cislaOtazok = new int[pocOtazok];
         poleSpravnychOdpovedi = new boolean[pocOtazok];
         odpovede = new int[4];
-        cislaOtazok = Nastroje.generujPoleOtazok(pocOtazok,pocRiadkov);
+        cislaOtazok = Nastroje.generujCisla(pocOtazok, pocRiadkov);
         obr.setVisibility(View.VISIBLE);
         otazka.setVisibility(View.VISIBLE);
         group.setVisibility(View.VISIBLE);

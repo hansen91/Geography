@@ -92,9 +92,6 @@ public class KontinentDetailFragment extends Fragment {
             Log.e("Detail fragment", "Error nacitanie obrazku");
         }*/
 
-
-
-
         return v;
     }
 

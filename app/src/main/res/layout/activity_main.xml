@@ -31,7 +31,7 @@
         android:id="@+id/btnKviz"
         android:visibility="visible"
         android:textColor="#000000"
-        android:layout_above="@+id/btnPexeso"
+        android:layout_above="@+id/btnKvizStaty"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/btnVyucba"
@@ -40,8 +40,8 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Pexeso"
-        android:id="@+id/btnPexeso"
+        android:text="Kviz-štáty"
+        android:id="@+id/btnKvizStaty"
         android:visibility="visible"
         android:textColor="#000000"
         android:layout_above="@+id/btnKoniec"
@@ -61,8 +61,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/btnPexeso"
-        android:layout_alignEnd="@+id/btnPexeso" />
+        android:layout_alignRight="@+id/btnKvizStaty"
+        android:layout_alignEnd="@+id/btnKvizStaty" />
 
 
     <TextView android:text="" android:layout_width="wrap_content"
