@@ -33,7 +33,7 @@ public class Vyhodnotenie extends Activity {
     int pocetSpravnychOdpovedi=0;
     int konst;
     int[] pole;
-    String  nazovObrazka;
+    String  typ_kvizu,nazovObrazka;
     TextView percento;
 
     @Override
@@ -45,22 +45,24 @@ public class Vyhodnotenie extends Activity {
 
         percento = (TextView) findViewById(R.id.percenta);
 
-        Bundle bund = getIntent().getExtras();
-        double pocOtazok = bund.getInt("poc_otazok");
-        pole = new int[bund.getInt("poc_otazok")];   // pole s vybratým počtom otázok
-
-
         Bundle bund2 = getIntent().getExtras();
-        pole = bund2.getIntArray("cisla_otazok");  //do poľa vložíme čísla otázok
+        double pocOtazok = bund2.getInt("poc_otazok");
+        pole = new int[bund2.getInt("poc_otazok")];   // pole s vybratým počtom otázok
 
 
         Bundle bund3 = getIntent().getExtras();
-        konst = bund3.getInt("konstanta_na_ocislovanie_zloziek");  //vyberieme si konštantu
+        pole = bund3.getIntArray("cisla_otazok");  //do poľa vložíme čísla otázok
 
+        Bundle vybKviz = getIntent().getExtras();
+        typ_kvizu = vybKviz.getString("typ_kvizu");
 
-        poleSoSpravnymiOdpovedami = new boolean[bund.getInt("poc_otazok")];
         Bundle bund4 = getIntent().getExtras();
-        poleSoSpravnymiOdpovedami = bund4.getBooleanArray("spravnost_odpovedi");
+        konst = bund4.getInt("konstanta_na_ocislovanie_zloziek");  //vyberieme si konštantu
+
+
+        poleSoSpravnymiOdpovedami = new boolean[bund2.getInt("poc_otazok")];
+        Bundle bund5 = getIntent().getExtras();
+        poleSoSpravnymiOdpovedami = bund5.getBooleanArray("spravnost_odpovedi");
 
         spravneOdpovede = new ArrayList<Boolean>();  //tu sa nachadzaju len správne odpovede
         for (int s = 0; s < pole.length; s++) {
@@ -103,17 +105,18 @@ public class Vyhodnotenie extends Activity {
             listDataChild = new HashMap<String, List<String>>();
             listDataPictures = new ArrayList<Drawable>();
 
-            //nacitaj do ArrayListu otazku
-            list_all = Nastroje.nacitajOtazkuZoSuboru(this,"hlmesto");
+            //nacitaj do ArrayListu typ kvizu
+            list_all = Nastroje.nacitajOtazkuZoSuboru(this,typ_kvizu);
             dataList = new ArrayList<List<String>>();
 
             for(int r = 0; r < pole.length; r++){
-                arr = new ArrayList<>();
+                arr = new ArrayList<String>();
 
-
+            if(konst == 6)
                 nazovObrazka = String.valueOf(list_all.get(pole[r]*konst - 6));
+               else nazovObrazka = "otaznik";
                 if (nazovObrazka==list_all.get(0)) nazovObrazka="f_1";
-                int resID = getResources().getIdentifier(nazovObrazka , "drawable", getPackageName());
+                int resID = getResources().getIdentifier(nazovObrazka,"drawable", getPackageName());
                 Drawable draw = getResources().getDrawable(resID);
                 listDataPictures.add(draw);
                 listDataHeader.add((r+1) + ") " + list_all.get(pole[r]*konst - 5));

@@ -1,5 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/pozadie">
 
-</LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Otázka"
+        android:id="@+id/txtOtazka"
+        android:layout_below="@+id/imgVlajka"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="32dp"
+        android:layout_marginStart="32dp"
+        android:textStyle="bold"
+        android:layout_marginTop="50dp" />
+
+    <LinearLayout
+        android:padding="5dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/layoutRadioBtn"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:layout_below="@+id/txtOtazka"
+        android:weightSum="1">
+
+        <RadioGroup
+            android:padding="10sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/radioGroup1"
+            android:layout_marginTop="20dp">
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/radio0"
+                android:background="@drawable/buttonbackground"
+                android:button="@null"
+                android:checked="true"
+                android:padding="11sp"
+                android:textStyle="bold"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Odpoved"/>
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Odpoved"
+                android:id="@+id/radio1"
+                android:button="@null"
+                android:padding="11sp"
+                android:textStyle="bold"
+                android:background="@drawable/buttonbackground"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Odpoved"
+                android:id="@+id/radio2"
+                android:button="@null"
+                android:padding="11sp"
+                android:textStyle="bold"
+                android:background="@drawable/buttonbackground"
+                android:textAppearance="?android:attr/textAppearanceSmall"	/>
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Odpoved"
+                android:id="@+id/radio3"
+                android:button="@null"
+                android:padding="11sp"
+                android:textStyle="bold"
+                android:background="@drawable/buttonbackground"
+                android:textAppearance="?android:attr/textAppearanceSmall"	/>
+
+
+        </RadioGroup>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutbutton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:orientation="horizontal">
+
+
+        <Button
+            android:layout_width="77dp"
+            android:layout_height="wrap_content"
+            android:text="@string/btnDoMenu"
+            android:id="@+id/btnDoMenu"
+            android:layout_weight="0.5" />
+
+        <Button
+            android:layout_width="77dp"
+            android:layout_height="wrap_content"
+            android:text="@string/btnPotvrd"
+            android:id="@+id/btnConfirm"
+            android:layout_weight="0.5" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>

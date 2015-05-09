@@ -1,24 +1,17 @@
 package durnek.bakalarka.geography;
 
-import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import durnek.bakalarka.geography.activities.KontinentActivity;
-import durnek.bakalarka.geography.activities.KontinentDetailActivity;
 import durnek.bakalarka.geography.application.OPrograme;
-import durnek.bakalarka.geography.classes.Kontinent;
-import durnek.bakalarka.geography.fragments.KontinentDetailFragment;
 import durnek.bakalarka.geography.kviz.Otazka;
 
 
@@ -42,28 +35,29 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         Button vyucba = (Button)findViewById(R.id.btnVyucba);
         vyucba.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
-                //Toast.makeText(context,"Vyucba kliknuta",Toast.LENGTH_LONG).show();
                 Intent myIntent = new Intent(context,KontinentActivity.class);
-                startActivity(myIntent);
+                startActivityForResult(myIntent,0);
             }
         });
 
 
 
-        Button kviz = (Button)findViewById(R.id.btnKviz);
-        kviz.setOnClickListener(new View.OnClickListener(){
+        Button kvizHlMesto = (Button)findViewById(R.id.btnKviz);
+        kvizHlMesto.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
                 Intent intent = new Intent(view.getContext(), Otazka.class);
-                intent.putExtra("activity_stat", 0);
-                startActivity(intent);
+                intent.putExtra("typ_kvizu", 1);
+                startActivityForResult(intent,0);
             }
         });
 
 
-        Button pexeso = (Button)findViewById(R.id.btnKvizStaty);
-        pexeso.setOnClickListener(new View.OnClickListener(){
+        Button kvizStat = (Button)findViewById(R.id.btnKvizStaty);
+        kvizStat.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
-                Toast.makeText(context,"Hra pexeso ešte nie je dokončená",Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(view.getContext(),Otazka.class);
+                intent.putExtra("typ_kvizu",0);
+                startActivityForResult(intent,0);
             }
         });
 

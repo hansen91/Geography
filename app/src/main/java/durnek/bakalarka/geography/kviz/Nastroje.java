@@ -91,8 +91,10 @@ public class Nastroje extends Activity{
     public static int pocetOtazok(Context context,String subor){
         int pom;
         int pocetRiadkov = 0;
-        subor = "hlmesto";
-        pom = 6;
+        if(subor == "hlmesto")
+            pom = 6;
+        else
+            pom = 5;
         String riadok;
         int resID = context.getResources().getIdentifier(subor, "raw",
                 context.getPackageName());

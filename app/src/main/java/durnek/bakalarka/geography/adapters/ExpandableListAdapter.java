@@ -21,48 +21,48 @@ import durnek.bakalarka.geography.R;
  */
 public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
-    private Context _context;
-    private List<String> _listDataHeader;
-    private List<Drawable> _listObrazky;
-    private List<Boolean> _spravneOdpovede;
-    private HashMap<String, List<String>> _listDataChild;
+    private Context context;
+    private List<String> listDataHeader;
+    private List<Drawable> listObrazky;
+    private List<Boolean> spravneOdpovede;
+    private HashMap<String, List<String>> listDataChild;
 
-    public ExpandableListAdapter(Context _context, List<String> listDataHeader,
+    public ExpandableListAdapter(Context context, List<String> listDataHeader,
                                  List<Drawable> listObrazky, List<Boolean> spravneOdpovede,
                                  HashMap<String, List<String>> listDataChild) {
-        this._context = _context;
-        this._listDataHeader = listDataHeader;
-        this._listObrazky = listObrazky;
-        this._spravneOdpovede = spravneOdpovede;
-        this._listDataChild = listDataChild;
+        this.context = context;
+        this.listDataHeader = listDataHeader;
+        this.listObrazky = listObrazky;
+        this.spravneOdpovede = spravneOdpovede;
+        this.listDataChild = listDataChild;
     }
 
     @Override
     public int getGroupCount() {
-        return this._listDataHeader.size();
+        return this.listDataHeader.size();
     }
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        return this._listDataChild.get(this._listDataHeader.get(groupPosition)).size();
+        return this.listDataChild.get(this.listDataHeader.get(groupPosition)).size();
     }
 
     @Override
     public Object getGroup(int groupPosition) {
-        return this._listDataHeader.get(groupPosition);
+        return this.listDataHeader.get(groupPosition);
     }
 
     public Object getObrazok(int groupPosition){
-        return this._listObrazky.get(groupPosition);
+        return this.listObrazky.get(groupPosition);
     }
 
     public boolean getSpravnost(int groupPosition){
-        return this._spravneOdpovede.get(groupPosition);
+        return this.spravneOdpovede.get(groupPosition);
     }
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        return this._listDataChild.get(this._listDataHeader.get(groupPosition)).get(childPosition);
+        return this.listDataChild.get(this.listDataHeader.get(groupPosition)).get(childPosition);
     }
 
     @Override
@@ -85,7 +85,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         String headerTitle = (String)getGroup(groupPosition);
 
         if(convertView == null){
-            LayoutInflater inflater = (LayoutInflater)this._context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater inflater = (LayoutInflater)this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.list_group,null);
         }
 
@@ -98,7 +98,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
             lblListHeader.setTextColor(Color.RED);
         else
             lblListHeader.setTextColor(Color.parseColor("#008000"));
-        Drawable drawable = (Drawable) getObrazok(groupPosition);
+            Drawable drawable = (Drawable) getObrazok(groupPosition);
 
         ImageView lblListHeaderObrazok = (ImageView) convertView
                 .findViewById(R.id.list_obrazok);
@@ -111,7 +111,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         final String childText = (String) getChild(groupPosition, childPosition);
 
         if(convertView == null){
-            LayoutInflater inflater = (LayoutInflater) this._context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater inflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.list_item,null);
         }
 

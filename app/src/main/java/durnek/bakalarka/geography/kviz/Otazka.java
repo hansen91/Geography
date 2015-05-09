@@ -24,15 +24,16 @@ public class Otazka extends Activity {
     int spravneOdpovede = 0;
     int pocOtazok = 0;
     int aktOtazka = 0;
+    int typ_kvizu;
     int[] cislaOtazok,odpovede;
     int konstanta = 5;
     boolean[] poleSpravnychOdpovedi;
     int spravne = 0;
     Button hlMenu,potvrd;
     RadioButton r0,r1,r2,r3;
-    TextView otazka,poradie;
+    TextView otazka;
     RadioGroup group;
-    String test;
+    String nazov_kvizu;
     DataBaseHelper db = null;
 
     final CharSequence[] questions = { " 5 ", " 10 ", " 15 ", " 20 "};
@@ -41,8 +42,15 @@ public class Otazka extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_otazka);
-        test = "hlmesto";
+        Bundle b = getIntent().getExtras();
+        typ_kvizu = b.getInt("typ_kvizu");
+        if(typ_kvizu == 1) {
+            setContentView(R.layout.activity_hl_mesta);
+            nazov_kvizu = "hlmesto";
+        }else{
+            setContentView(R.layout.kviz_staty);
+            nazov_kvizu = "staty";
+        }
         hlMenu = (Button) findViewById(R.id.btnDoMenu);
         hlMenu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,8 +70,8 @@ public class Otazka extends Activity {
             }
         });
 
-        otazky = Nastroje.nacitajOtazkuZoSuboru(this, test);
-        pocRiadkov = Nastroje.pocetOtazok(this, test);
+        otazky = Nastroje.nacitajOtazkuZoSuboru(this, nazov_kvizu);
+        pocRiadkov = Nastroje.pocetOtazok(this, nazov_kvizu);
 
         nastavPocOtazok();
 
@@ -80,9 +88,11 @@ public class Otazka extends Activity {
         potvrd.setVisibility(View.INVISIBLE);
         hlMenu.setVisibility(View.INVISIBLE);
 
-        obr = (ImageView)findViewById(R.id.imgVlajka);
-        obr.setVisibility(View.INVISIBLE);
-        konstanta = 6;
+        if(typ_kvizu == 1) {
+            obr = (ImageView) findViewById(R.id.imgVlajka);
+            obr.setVisibility(View.INVISIBLE);
+            konstanta = 6;
+        }
     }
 
     public void potvrdzovacieOkno(){
@@ -106,7 +116,7 @@ public class Otazka extends Activity {
         if(aktOtazka == cislaOtazok.length){
 
         Intent i = new Intent(this, Vyhodnotenie.class);
-            i.putExtra("test",test);
+            i.putExtra("typ_kvizu",nazov_kvizu);
             i.putExtra("poc_otazok",pocOtazok);
             i.putExtra("cisla_otazok",cislaOtazok);
             i.putExtra("spravnost_odpovedi",poleSpravnychOdpovedi);
@@ -172,7 +182,7 @@ public class Otazka extends Activity {
         odpovede = Nastroje.generujCisla(4, 4);
 
 
-        if (test == "hlmesto") {
+        if (typ_kvizu == 1) {
 
              String pom = String.valueOf(otazky.get((cislaOtazok[aktOtazka] * konstanta) - 6));  //vlajka
             if (pom == otazky.get(0))
@@ -203,7 +213,8 @@ public class Otazka extends Activity {
         poleSpravnychOdpovedi = new boolean[pocOtazok];
         odpovede = new int[4];
         cislaOtazok = Nastroje.generujCisla(pocOtazok, pocRiadkov);
-        obr.setVisibility(View.VISIBLE);
+        if(typ_kvizu == 1)
+            obr.setVisibility(View.VISIBLE);
         otazka.setVisibility(View.VISIBLE);
         group.setVisibility(View.VISIBLE);
         potvrd.setVisibility(View.VISIBLE);
