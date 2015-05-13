@@ -4,7 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * Created by Lukas on 12. 3. 2015.
+ * Trieda Kontinent
  */
 public class Kontinent implements Parcelable {
     private int _id;

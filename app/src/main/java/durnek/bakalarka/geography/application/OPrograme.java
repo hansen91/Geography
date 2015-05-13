@@ -12,7 +12,7 @@ import android.widget.Toast;
 import durnek.bakalarka.geography.R;
 
 /**
- * Created by Lukas on 12. 3. 2015.
+ * Trieda, ktorá zobrazuje odkaz na web stránku, z ktorej sú stiahnuté obrázky
  */
 public class OPrograme extends ActionBarActivity implements View.OnClickListener{
     TextView link;
@@ -27,12 +27,8 @@ public class OPrograme extends ActionBarActivity implements View.OnClickListener
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {   //chceme nastavit vysledok nasej operacie od resultu
             setResult(RESULT_OK,new Intent().putExtra("download","OPrograme"));
             finish();   //ukonci danu aktivitu a spätne sa vrati na prvu aktivitu

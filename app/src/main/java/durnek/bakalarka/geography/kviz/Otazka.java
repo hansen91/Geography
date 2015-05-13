@@ -28,7 +28,7 @@ public class Otazka extends Activity {
     int[] cislaOtazok,odpovede;
     int konstanta = 5;
     boolean[] poleSpravnychOdpovedi;
-    int spravne = 0;
+    int spravne;
     Button hlMenu,potvrd;
     RadioButton r0,r1,r2,r3;
     TextView otazka;
@@ -42,8 +42,18 @@ public class Otazka extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Bundle b = getIntent().getExtras();
-        typ_kvizu = b.getInt("typ_kvizu");
+
+        if(savedInstanceState != null){//ak nie je null = nastala zmena stavu, napr. rotacia obrazovky
+            //obnovenie z ulozeneho stavu
+            typ_kvizu = savedInstanceState.getInt("typ_kvizu",1);
+
+        } else {//ide nove spustenie
+            //nacitanie zo spustajuceho intentu
+            Bundle b = getIntent().getExtras();
+            typ_kvizu = b.getInt("typ_kvizu");
+        }
+
+        //nafuknutie content view
         if(typ_kvizu == 1) {
             setContentView(R.layout.activity_hl_mesta);
             nazov_kvizu = "hlmesto";
@@ -51,6 +61,7 @@ public class Otazka extends Activity {
             setContentView(R.layout.kviz_staty);
             nazov_kvizu = "staty";
         }
+
         hlMenu = (Button) findViewById(R.id.btnDoMenu);
         hlMenu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,10 +81,11 @@ public class Otazka extends Activity {
             }
         });
 
-        otazky = Nastroje.nacitajOtazkuZoSuboru(this, nazov_kvizu);
-        pocRiadkov = Nastroje.pocetOtazok(this, nazov_kvizu);
+            otazky = Nastroje.nacitajOtazkuZoSuboru(this, nazov_kvizu);
+            pocRiadkov = Nastroje.pocetOtazok(this, nazov_kvizu);
 
-        nastavPocOtazok();
+            nastavPocOtazok();
+
 
         //spravna odpoved je ta, kde hodnota v poli je 4
         otazka = (TextView)findViewById(R.id.txtOtazka);
@@ -95,6 +107,9 @@ public class Otazka extends Activity {
         }
     }
 
+    /**
+     * metóda na potrvdenie ukončenia kvízu
+     */
     public void potvrdzovacieOkno(){
         new AlertDialog.Builder(this).setTitle("Koniec kvízu").setMessage("Určite sa chcete vrátiť do menu?")
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
@@ -110,6 +125,9 @@ public class Otazka extends Activity {
                 .show();
     }
 
+    /**
+     * metóda, pomocou ktorej sa prejde na nasledujúcu otázku
+     */
     public void dalsiaOtazka(){
         kontrola();
         aktOtazka++;
@@ -130,6 +148,9 @@ public class Otazka extends Activity {
         }
     }
 
+    /**
+     * metóda kontroluje či bol označený správny radiobutton
+     */
     public void kontrola(){
         int radioButtonID = group.getCheckedRadioButtonId();
         View radioButton = group.findViewById(radioButtonID);
@@ -144,6 +165,9 @@ public class Otazka extends Activity {
         }
     }
 
+    /**
+     * metóda nastaví počet otázok na začiatku kvízu
+     */
     public void nastavPocOtazok(){
         new AlertDialog.Builder(this).setTitle("Vyber si počet otázok").setCancelable(false).setSingleChoiceItems(questions, -1,
                 new DialogInterface.OnClickListener(){
@@ -177,10 +201,11 @@ public class Otazka extends Activity {
                 }).show();
     }
 
+    /**
+     * metóda nastaví otazku, radiobuttony, vlajky
+     */
     public void polozOtazku() {
-        // getActionBar().setTitle("Hlavné mestá " + (aktOtazka + 1) + "/" + pocOtazok);
         odpovede = Nastroje.generujCisla(4, 4);
-
 
         if (typ_kvizu == 1) {
 
@@ -208,6 +233,9 @@ public class Otazka extends Activity {
 
     }
 
+    /**
+     * metóda nastaví viditeľnosť radiobuttonov a nastaví pole s číslami
+     */
     public void generujANastavViditelnost(){
         cislaOtazok = new int[pocOtazok];
         poleSpravnychOdpovedi = new boolean[pocOtazok];

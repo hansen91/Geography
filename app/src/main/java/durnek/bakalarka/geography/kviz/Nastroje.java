@@ -21,11 +21,15 @@ import durnek.bakalarka.geography.DataBaseHelper;
 import durnek.bakalarka.geography.R;
 import durnek.bakalarka.geography.classes.Stat;
 
-/**
- * Created by Lukas on 18. 4. 2015.
- */
+
 public class Nastroje extends Activity{
 
+    /**
+     * metóda na načítavanie zo súboru
+     * @param context
+     * @param subor
+     * @return zoznam otázok
+     */
     public static ArrayList<String> nacitajOtazkuZoSuboru(Context context,String subor){
         ArrayList<String> zoznam = new ArrayList<String>();
         String riadok;
@@ -49,44 +53,11 @@ public class Nastroje extends Activity{
         return zoznam;
     }
 
-    static class Stat
-    {
-        private String nazov;
-        private int id_statu;
-
-        public String getNazov() {
-            return nazov;
-        }
-
-        public int getIdStatu() {
-            return id_statu;
-        }
-
-        Stat(int idStatu, String nazov) {
-            this.id_statu = idStatu;
-            this.nazov = nazov;
-
-        }
-    }
-
-    public static List<Stat> vyberStatov(Context context){
-        List<Stat> aktOdpovede = new ArrayList<Stat>();
-        Cursor c = null;
-        DataBaseHelper db = new DataBaseHelper(context);
-
-        String select = "SELECT id_statu,nazov FROM Stat";
-        c = db.getReadableDatabase().rawQuery(select,null);
-        while(c.moveToNext()){
-            aktOdpovede.add(new Stat(c.getInt(0),c.getString(1)));
-        }
-        return aktOdpovede;
-    }
-
     /**
      * metóda, ktorá vráti počet otázok
      * @param context
      * @param subor
-     * @return
+     * @return počet otázok
      */
     public static int pocetOtazok(Context context,String subor){
         int pom;
@@ -124,7 +95,7 @@ public class Nastroje extends Activity{
      * metóda,ktorá vygeneruje pole s číslami otázok
      * @param velkost
      * @param hornaHranica
-     * @return
+     * @return pole s číslami otázok
      */
     public static int[] generujCisla(int velkost, int hornaHranica){
         int pole[] = new int[velkost];
@@ -157,38 +128,10 @@ public class Nastroje extends Activity{
         return pole;
     }
 
-   /* public static int[] generujPoleOdpovedi(int velkostPola, int hornaHranica){
-        int[] poleOdpovedi = new int[velkostPola];
-
-        int poc = 3;
-        int nahCislo = 0;
-        int prvaOdpoved = 0;
-
-        boolean opakujeSa = false;
-
-        Random rnd = new Random();
-
-        do{
-            nahCislo = rnd.nextInt(hornaHranica)+1;
-            for(int i=0; i < poc; i++){
-
-                if(poleOdpovedi[i] == nahCislo){
-                    opakujeSa = true;
-                    break;
-                }
-            }
-            if(opakujeSa == false){
-                poleOdpovedi[poc] = nahCislo;
-                poc++;
-            }else
-                    opakujeSa = false;
-
-        }while(poc < velkostPola);
-        return poleOdpovedi;
-    }*/
-
-
-
+    /**
+     * toast pri správnej odpovedi
+     * @param context
+     */
     public static void zobrazSpravne(Context context){
         final Toast toast = new Toast(context.getApplicationContext());
         ImageView correctObr = new ImageView(context.getApplicationContext());
@@ -205,6 +148,10 @@ public class Nastroje extends Activity{
         },500);
     }
 
+    /**
+     * toast pri nesprávnej odpovedi
+     * @param context
+     */
     public static void zobrazNespravne(Context context){
         final Toast toast = new Toast(context.getApplicationContext());
         ImageView incorrectObr = new ImageView(context.getApplicationContext());

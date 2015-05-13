@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -15,19 +17,17 @@ import durnek.bakalarka.geography.classes.Kontinent;
 import durnek.bakalarka.geography.classes.Stat;
 
 /**
- * Created by Lukas on 15. 4. 2015.
+ * Adaptér pomocou ktorého sa zobrazujú dáta o štátoch z databázy
  */
 public class StatAdapter  extends ArrayAdapter<Stat> {
     public ArrayList<Stat> states;
     public LayoutInflater inflater;
-    //public Context context;
 
     public StatAdapter(Context context, int resource, List<Stat> objects) {
         super(context, resource, objects);
 
         this.inflater = LayoutInflater.from(context);
         this.states = (ArrayList) objects;
-        //this.context = context;
     }
 
     @Override
@@ -45,25 +45,6 @@ public class StatAdapter  extends ArrayAdapter<Stat> {
         TextView txtvNazov = (TextView) itemView.findViewById(R.id.item_tvNazov);
         txtvNazov.setText(actStat.getNazov());
 
-
-
-
-        /**
-         * ku statu
-         */
-        /*ImageView imgvVlajka = (ImageView) itemView.findViewById(R.id.item_imgvVlajka);
-
-        String s = "R.drawable.f_"+actStat.getId(); //res/drawable/f_1.png
-        Drawable d = Drawable.createFromPath(s);
-
-        imgvVlajka.setImageDrawable(d);
-
-        Resources resources = context.getResources();
-        int resId = resources.getIdentifier(name, "drawable", context.getPackageName());
-        imgvVlajka.setImageResource(resId);*/
-
         return itemView;
-
-    }
-
+     }
 }

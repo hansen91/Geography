@@ -17,7 +17,7 @@ import java.util.List;
 import durnek.bakalarka.geography.R;
 
 /**
- * Created by Lukas on 18. 4. 2015.
+ * Adaptér pomocou ktorého nastavím a zobrazím otázky a odpovede
  */
 public class ExpandableListAdapter extends BaseExpandableListAdapter {
 

@@ -14,21 +14,19 @@ import durnek.bakalarka.geography.R;
 import durnek.bakalarka.geography.classes.Kontinent;
 
 /**
- * Created by Lukas on 14. 4. 2015.
+ * Adaptér pomocou ktorého sa zobrazujú dáta o kontinentoch z databázy
  */
 public class KontinentAdapter
     extends ArrayAdapter<Kontinent> {
 
     public ArrayList<Kontinent> kontinents;
     public LayoutInflater inflater;
-    //public Context context;
 
     public KontinentAdapter(Context context, int resource, List<Kontinent> objects) {
         super(context, resource, objects);
 
         this.inflater = LayoutInflater.from(context);
         this.kontinents = (ArrayList) objects;
-        //this.context = context;
     }
 
     @Override
@@ -41,7 +39,7 @@ public class KontinentAdapter
 
         Kontinent actKontintent = kontinents.get(position);
 
-    //naplnenie view
+        //naplnenie view
         //Nazov
         TextView txtvNazov = (TextView) itemView.findViewById(R.id.item_tvNazov);
         txtvNazov.setText(actKontintent.getNazov());
@@ -50,23 +48,6 @@ public class KontinentAdapter
         TextView txtvPocetStatov = (TextView) itemView.findViewById(R.id.item_tvPocStatov);
         txtvPocetStatov.setText("Počet štátov: " + actKontintent.getPocetStatov());
 
-
-        /**
-         * ku statu
-         */
-        /*ImageView imgvVlajka = (ImageView) itemView.findViewById(R.id.item_imgvVlajka);
-
-        String s = "R.drawable.f_"+actStat.getId(); //res/drawable/f_1.png
-        Drawable d = Drawable.createFromPath(s);
-
-        imgvVlajka.setImageDrawable(d);
-
-        Resources resources = context.getResources();
-        int resId = resources.getIdentifier(name, "drawable", context.getPackageName());
-        imgvVlajka.setImageResource(resId);*/
-
         return itemView;
-
     }
-
-}//end TestAdapter
+}

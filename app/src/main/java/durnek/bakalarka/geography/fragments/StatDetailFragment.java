@@ -44,7 +44,7 @@ public class StatDetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View v = inflater.inflate(R.layout.fragment_stat_detail, container, false);
 
         //nacitanie z databazy
@@ -67,21 +67,6 @@ public class StatDetailFragment extends Fragment {
         ((TextView) v.findViewById(R.id.tvJazyk)).setText("Úradný jazyk:   " + (stat.getJazyky() == null ? "angličtina" : stat.getJazyky()));
         ((TextView) v.findViewById(R.id.tvMena)).setText("Mena:   " + stat.getMena());
 
-      /*  try {
-            // get input stream
-            InputStream ims = getActivity().getAssets().open(recept.detailPic);
-            // load image as Drawable
-            Drawable d = Drawable.createFromStream(ims, null);
-            // set image to ImageView
-            ((ImageView) v.findViewById(R.id.obrazok)).setImageDrawable(d);
-        } catch (IOException ex) {
-            Log.e("Detail fragment", "Error nacitanie obrazku");
-        }*/
-
-
-
-
         return v;
     }
-
 }

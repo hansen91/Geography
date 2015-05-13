@@ -100,43 +100,45 @@ public class Vyhodnotenie extends Activity {
            percento.setText(String.format("%.0f" , pocetSpravnychOdpovedi/pocOtazok*100) + "%");
         }
     }
-        private void dataVZozname(){
-            listDataHeader = new ArrayList<String>();
-            listDataChild = new HashMap<String, List<String>>();
-            listDataPictures = new ArrayList<Drawable>();
 
-            //nacitaj do ArrayListu typ kvizu
-            list_all = Nastroje.nacitajOtazkuZoSuboru(this,typ_kvizu);
-            dataList = new ArrayList<List<String>>();
+    /**
+     * výsledný zoznam vo vyhodnotení
+     */
+     private void dataVZozname(){
+        listDataHeader = new ArrayList<String>();
+        listDataChild = new HashMap<String, List<String>>();
+        listDataPictures = new ArrayList<Drawable>();
 
-            for(int r = 0; r < pole.length; r++){
-                arr = new ArrayList<String>();
+        //nacitaj do ArrayListu typ kvizu
+        list_all = Nastroje.nacitajOtazkuZoSuboru(this,typ_kvizu);
+        dataList = new ArrayList<List<String>>();
 
-            if(konst == 6)
-                nazovObrazka = String.valueOf(list_all.get(pole[r]*konst - 6));
-               else nazovObrazka = "otaznik";
-                if (nazovObrazka==list_all.get(0)) nazovObrazka="f_1";
-                int resID = getResources().getIdentifier(nazovObrazka,"drawable", getPackageName());
-                Drawable draw = getResources().getDrawable(resID);
-                listDataPictures.add(draw);
-                listDataHeader.add((r+1) + ") " + list_all.get(pole[r]*konst - 5));
-                arr.add(" ✔" + list_all.get(pole[r]*konst - 4));
-                arr.add(" ✘" + list_all.get(pole[r]*konst - 3));
-                arr.add(" ✘" + list_all.get(pole[r]*konst - 2));
-                arr.add(" ✘" + list_all.get(pole[r]*konst - 1));
-                dataList.add(arr);
-            }
+        for(int r = 0; r < pole.length; r++){
+            arr = new ArrayList<String>();
 
-            for(int q=0; q < pole.length; q++){
-                listDataChild.put(listDataHeader.get(q), dataList.get(q));
-            }
+        if(konst == 6)
+            nazovObrazka = String.valueOf(list_all.get(pole[r]*konst - 6));
+            else nazovObrazka = "otaznik";
+            if (nazovObrazka==list_all.get(0)) nazovObrazka="f_1";
+            int resID = getResources().getIdentifier(nazovObrazka,"drawable", getPackageName());
+            Drawable draw = getResources().getDrawable(resID);
+            listDataPictures.add(draw);
+            listDataHeader.add((r+1) + ") " + list_all.get(pole[r]*konst - 5));
+            arr.add(" ✔" + list_all.get(pole[r]*konst - 4));
+            arr.add(" ✘" + list_all.get(pole[r]*konst - 3));
+            arr.add(" ✘" + list_all.get(pole[r]*konst - 2));
+            arr.add(" ✘" + list_all.get(pole[r]*konst - 1));
+            dataList.add(arr);
         }
 
+        for(int q=0; q < pole.length; q++){
+            listDataChild.put(listDataHeader.get(q), dataList.get(q));
+        }
+     }
 
-       public void koniecAktivity(){
-           list_all.clear();
-           super.finish();
 
-
-    }
+     public void koniecAktivity(){
+       list_all.clear();
+       super.finish();
+     }
 }

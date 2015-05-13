@@ -30,7 +30,7 @@ public class KontinentDetailFragment extends Fragment {
     }
 
     public KontinentDetailFragment() {
-        // Required empty public constructor
+
     }
 
     @Override
@@ -45,7 +45,7 @@ public class KontinentDetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View v = inflater.inflate(R.layout.fragment_kontinent_detail, container, false);
 
         //nacitanie z databazy
@@ -81,18 +81,6 @@ public class KontinentDetailFragment extends Fragment {
         ((TextView) v.findViewById(R.id.rozloha)).setText("Rozloha:    " + kontinent.getRozloha() + "  km2");
         ((TextView) v.findViewById(R.id.populacia)).setText("Populácia:   " + kontinent.getPopulacia() + " obyv.");
 
-      /*  try {
-            // get input stream
-            InputStream ims = getActivity().getAssets().open(recept.detailPic);
-            // load image as Drawable
-            Drawable d = Drawable.createFromStream(ims, null);
-            // set image to ImageView
-            ((ImageView) v.findViewById(R.id.obrazok)).setImageDrawable(d);
-        } catch (IOException ex) {
-            Log.e("Detail fragment", "Error nacitanie obrazku");
-        }*/
-
         return v;
     }
-
 }

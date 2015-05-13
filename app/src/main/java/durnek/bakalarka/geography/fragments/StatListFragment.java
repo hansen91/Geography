@@ -51,7 +51,6 @@ public class StatListFragment extends ListFragment {
         }
 
         states = dbHelper.getAllStates(idKontinentu);
-        //states = dbHelper.getAllStates(2);
 
         ArrayAdapter<Stat> adapter = new StatAdapter(getActivity(), R.layout.item_view_stat,states);
 

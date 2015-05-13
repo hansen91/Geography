@@ -20,27 +20,32 @@
         <activity
             android:name=".activities.KontinentActivity"
             android:label="@string/title_activity_kontinenty"
+            android:screenOrientation="portrait"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
         <activity android:name=".application.OPrograme"
-                  android:label="O programe" >
+            android:screenOrientation="portrait"
+            android:label="O programe" >
         </activity>
         <activity
             android:name=".activities.KontinentDetailActivity"
-            android:label=".KontinentDetailActivity">
+            android:label=".KontinentDetailActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.KontinentActivity" />
         </activity>
         <activity
             android:name=".kviz.Otazka"
-            android:label="@string/title_activity_otazka" >
+            android:label="@string/title_activity_otazka"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".activities.StatActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_stat"
             android:parentActivityName=".MainActivity">
             <meta-data
@@ -49,10 +54,12 @@
         </activity>
         <activity
             android:name=".activities.StatDetailActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_activity_stat_detail" >
         </activity>
         <activity
             android:name=".kviz.Vyhodnotenie"
+            android:screenOrientation="portrait"
             android:label="Vyhodnotenie">
             </activity>
     </application>

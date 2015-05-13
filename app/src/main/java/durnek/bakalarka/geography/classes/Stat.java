@@ -105,7 +105,6 @@ public class Stat implements Parcelable{
         dest.writeString(mesta);
         dest.writeString(jazyky);
         dest.writeString(mena);
-
     }
 
     public static final Parcelable.Creator<Stat> CREATOR

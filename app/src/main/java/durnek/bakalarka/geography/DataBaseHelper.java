@@ -20,7 +20,7 @@ import durnek.bakalarka.geography.classes.Kontinent;
 import durnek.bakalarka.geography.classes.Stat;
 
 /**
- * Created by Lukas on 28. 2. 2015.
+ * Trieda, kde sa nachádza databáza
  */
 public class DataBaseHelper
         extends SQLiteOpenHelper {
@@ -78,10 +78,7 @@ public class DataBaseHelper
         super.close();
     }
 
-    /***
-     * Check if the database is exist on device or not
-     * @return
-     */
+
     private boolean checkDataBase() {
         SQLiteDatabase tempDB = null;
         try {
@@ -96,7 +93,7 @@ public class DataBaseHelper
     }
 
     /***
-     * Copy database from source code assets to device
+     * Kopírovanie databázy zo zdrojového kódu do zariadenia
      * @throws IOException
      */
     public void copyDataBase() throws IOException {
@@ -122,7 +119,7 @@ public class DataBaseHelper
     }
 
     /***
-     * Open database
+     * Otvorenie databázy
      * @throws SQLException
      */
     public void openDataBase() throws SQLException {
@@ -131,7 +128,7 @@ public class DataBaseHelper
     }
 
     /***
-     * Check if the database doesn't exist on device, create new one
+     * metóda zistí či databáza existuje v zariadení
      * @throws IOException
      */
     public void createDataBase() throws IOException {
@@ -149,6 +146,10 @@ public class DataBaseHelper
         }
     }
 
+    /**
+     * metóda vráti zoznam kontinentov spolu s počtom štátov
+     * @return zoznam kontinentov s počtom štátov
+     */
     public List<Kontinent> getContinentsWithStatesNumber(){
         List<Kontinent> listContinents = new ArrayList<Kontinent>();
         SQLiteDatabase db = getWritableDatabase();
@@ -172,7 +173,11 @@ public class DataBaseHelper
         return listContinents;
     }
 
-
+    /**
+     * metóda vráti konkrétny kontinent
+     * @param id
+     * @return kontinent
+     */
     public Kontinent dajKontinent(int id){
         Kontinent kontinent = null;
 
@@ -194,7 +199,11 @@ public class DataBaseHelper
         return kontinent;
     }
 
-
+    /**
+     * metóda vráti zoznam štátov daného kontinentu
+     * @param idKontinentu
+     * @return zoznam štátov
+     */
     public List<Stat> getAllStates(int idKontinentu){
         List<Stat> listStates = new ArrayList<Stat>();
         SQLiteDatabase db = this.getReadableDatabase();
@@ -216,6 +225,11 @@ public class DataBaseHelper
         return listStates;
  }
 
+    /**
+     * metóda vráti konkrétny štát
+     * @param id
+     * @return štát
+     */
    public Stat dajStat(int id){
         Stat stat = null;
 

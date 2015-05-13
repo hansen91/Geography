@@ -15,9 +15,6 @@ import durnek.bakalarka.geography.adapters.KontinentAdapter;
 import durnek.bakalarka.geography.classes.Kontinent;
 
 
-/**
- * Created by Lukas on 6. 3. 2015.
- */
 public class KontinentListFragment
     extends ListFragment {
 
@@ -71,26 +68,9 @@ public class KontinentListFragment
             }
         }
 
-    /*
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        // Save the ListView position
-        mListViewScrollPos = getListView().onSaveInstanceState();
-    }
-
-    public void setActivateOnItemClick(boolean b) {
-        if (b)
-            getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-        else
-            getListView().setChoiceMode(ListView.CHOICE_MODE_NONE);
-
-    }
-    */
     public interface OnKontinentSelectedListener {
 
         public void onKontinentSelected(int id);
 
     }
-
 }

@@ -1,8 +1,5 @@
 package durnek.bakalarka.geography.activities;
 
-/**
- * Created by Lukas on 12. 3. 2015.
- */
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
@@ -32,40 +29,19 @@ public class KontinentActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true; //super.onCreateOptionsMenu(menu);
+        return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
-        /*switch (item.getItemId()) {
-            case 1 : R.id.oprograme:
-                Intent i1 = new Intent(this, OPrograme.class);
-                startActivity(i1);
-                return true;
-
-        }*/
 
         int id = item.getItemId();
         if(id == R.id.action_settings){
             return true;
         }
         return super.onOptionsItemSelected(item);
-
     }
-
-   /* public void onSaveInstanceState(Bundle savedInstanceState) {
-        super.onSaveInstanceState(savedInstanceState);
-        savedInstanceState.putLong(VYBRANY_KONTINENT, vybranyKontinent);
-    }
-
-    public void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        if (savedInstanceState != null)
-            vybranyKontinent = savedInstanceState.getLong(VYBRANY_KONTINENT);
-    }*/
 
     @Override
     public void onKontinentSelected(int id) {
@@ -78,7 +54,6 @@ public class KontinentActivity
             Intent intent = new Intent(this, KontinentDetailActivity.class);
             intent.putExtra("id", id);
             startActivity(intent);
-
         }
     }
 }
