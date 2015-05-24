@@ -32,6 +32,8 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             mDualPane = true; //Landscape |  |
 
 
+
+
         Button vyucba = (Button)findViewById(R.id.btnVyucba);
         vyucba.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){

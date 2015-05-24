@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,7 +27,9 @@ public class DataBaseHelper
         extends SQLiteOpenHelper {
 
     public static String DB_PATH = "/data/data/durnek.bakalarka.geography/databases/";
-    public static String DB_NAME = "svetDB.sqlite";
+    //public static String DB_NAME = "svetDB.sqlite";
+    //public static String DB_NAME = "exportdatabase.sqlite";
+    public static String DB_NAME = "databazasvet.sqlite";
     public static final int DB_VERSION = 1;
 
     //TABULKY
@@ -46,7 +49,6 @@ public class DataBaseHelper
     private static final String KEY_NAZOV_STAT = "nazov";
     private static final String KEY_HL_MESTO = "hl_mesto";
     private static final String KEY_ROZLOHA_STAT = "rozloha";
-   // private static final String KEY_JEDNOTKA = "jednotka";
     private static final String KEY_POPULACIA_STAT = "populacia";
     private static final String KEY_MESTA = "zname_mesta";
     private static final String KEY_JAZYK = "uradny_jazyk";
@@ -85,11 +87,12 @@ public class DataBaseHelper
             String myPath = DB_PATH + DB_NAME;
             tempDB = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
         } catch (SQLiteException e) {
-            Log.e("error", e.getMessage());
+            Log.e("error Open database", e.getMessage());
         }
         if (tempDB != null)
             tempDB.close();
         return tempDB != null ? true : false;
+
     }
 
     /***
